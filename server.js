@@ -1,26 +1,22 @@
 //
-// # SimpleServer
+// # Kalicos
 //
-// A simple chat server using Socket.IO, Express, and Async.
+// A simple server to display json data.
 //
 
 var http = require('http');
 var path = require('path');
 
-var async = require('async');
-var socketio = require('socket.io');
 var express = require('express');
 
-//
-// ## SimpleServer `SimpleServer(obj)`
-//
-// Creates a new instance of SimpleServer with the following options:
-//  * `port` - The HTTP port to listen on. If `process.env.PORT` is set, _it overrides this value_.
-//
-var router = express();
-var server = http.createServer(router);
+var app = express();
+var server = http.createServer(app);
 
-router.use(express.static(path.resolve(__dirname, 'static')));
+app.use(express.static(path.resolve(__dirname, 'static')));
+
+app.get('*', function(req, res) {
+  res.sendfile('./static/index.html'); // load the single view file (react will handle the page changes on the front-end)
+});
 
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
   var addr = server.address();
