@@ -6,6 +6,10 @@ The goal is to help people easily find nonprofits that they would like to contri
 ### Todo
 - Reduce the load time for many data points.
 
+### Documentation
+Better understand the project and how to contribute here: [Docs](https://github.com/CodeForBoulder/Kalicos/docs)
+
+
 ### Deployment
 
 Very basic deployment to s3 using `make deploy-s3`
