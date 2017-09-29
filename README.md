@@ -7,7 +7,7 @@ The goal is to help people easily find nonprofits that they would like to contri
 - Reduce the load time for many data points.
 
 ### Documentation
-Better understand the project and how to contribute here: [Docs](https://github.com/CodeForBoulder/Kalicos/docs)
+Better understand the project and how to contribute here: [Docs](https://github.com/CodeForBoulder/Kalicos/tree/master/docs)
 
 
 ### Deployment
