@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
-
+import { Field, reduxForm } from 'redux-form'
 
 const Header = () => (
   <div>
@@ -12,6 +12,18 @@ const Header = () => (
   </div>
 )
 
+let SubTaskCreateForm = () => (
+  <form>
+    <label>Address</label>
+    <Field name="title" component="input" type="text" />
+    <label>Address2</label>
+    <Field name="description" component="input" type="text" />
+  </form>
+)
+
+SubTaskCreateForm = reduxForm({ form: 'createSubTask' })(SubTaskCreateForm)
+
+
 const Home = () => (
   <div> This is the landing ... testing deployment</div>
 )
@@ -21,18 +33,21 @@ const About = () => (
 )
 
 const Maps = () => (
-  <div> This is the maps page </div>
+  <div>
+    This is the maps page
+    <SubTaskCreateForm />
+  </div>
 )
 
 class App extends Component {
   render() {
     return (
-        <div>
-          <Header />
-          <Route exact path="/" component={ Home } />
-          <Route path="/about" component={ About } />
-          <Route path="/maps" component={ Maps } />
-        </div>
+      <div>
+        <Header />
+        <Route exact path="/" component={ Home } />
+        <Route path="/about" component={ About } />
+        <Route path="/maps" component={ Maps } />
+      </div>
     )
   }
 }
