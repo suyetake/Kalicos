@@ -3,7 +3,7 @@ import { Route, Link } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 import { mapsApiKey } from '../config'
 
-import { Map, GoogleApiWrapper } from 'google-maps-react'
+import GoogleMapReact from 'google-map-react'
 
 window.foo = mapsApiKey
 const Header = () => (
@@ -27,16 +27,6 @@ let SubTaskCreateForm = () => (
 
 SubTaskCreateForm = reduxForm({ form: 'createSubTask' })(SubTaskCreateForm)
 
-class MapContainer extends Component {
-  render() {
-    return (
-      <Map google={ this.props.google } zoom={ 14 } />
-    )
-  }
-}
-
-const KalicosMap = GoogleApiWrapper({ apiKey: mapsApiKey })(MapContainer)
-
 const Home = () => (
   <div> This is the landing ... testing deployment</div>
 )
@@ -49,7 +39,13 @@ const Maps = () => (
   <div>
     This is the maps page
     <SubTaskCreateForm />
-    <KalicosMap />
+    <div style={{ height: "16em", width: "16em" }}>
+      <GoogleMapReact
+        defaultCenter={{ lat: 59.95, lng: 30.33 }}
+        defaultZoom={ 11 }
+        bootstrapURLKeys={{ key: mapsApiKey }}
+      />
+    </div>
   </div>
 )
 
