@@ -6,6 +6,7 @@ import { mapsApiKey } from '../config'
 import GoogleMapReact from 'google-map-react'
 
 window.foo = mapsApiKey
+
 const Header = () => (
   <div>
     <ul>
@@ -35,21 +36,51 @@ const About = () => (
   <div> This is the about page </div>
 )
 
+const SomePoint = ({ text }) => <div style={{
+    position: 'relative', color: 'white', background: 'red',
+    height: 40, width: 60, top: -20, left: -30,    
+  }}>
+    {text}
+  </div> 
+
+
 const Maps = () => (
   <div>
     This is the maps page
     <SubTaskCreateForm />
     <div style={{ height: "16em", width: "16em" }}>
       <GoogleMapReact
-        defaultCenter={{ lat: 59.95, lng: 30.33 }}
+        defaultCenter={{ lat: 40.0150, lng: -105.2705 }}
         defaultZoom={ 11 }
         bootstrapURLKeys={{ key: mapsApiKey }}
       />
+      <SomePoint
+        lat={40.0150}
+        lng={-105.2705}
+        text={'Boulder'}
+      />
+
+      <button onClick={codeAddress}>show me</button>
+      
     </div>
   </div>
 )
 
+const codeAddress = () => {
+  const geocoder = new window.google.maps.Geocoder();
+  let address = '1600 Range St #101, Boulder, CO 80301'
+  geocoder.geocode({ 'address': address }, ((results, status) => { 
+    if (status === 'OK') {
+      console.log('lat ', results[0].geometry.location.lat())
+      console.log('lng ', results[0].geometry.location.lng())
+    } else {
+      console.log('Geocode not successful ', status)
+    }
+  }))
+}
+
 class App extends Component {
+
   render() {
     return (
       <div>
