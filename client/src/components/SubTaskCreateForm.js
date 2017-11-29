@@ -13,13 +13,12 @@ class SubTaskCreateForm extends Component {
     }
   }
 
-  companyNameOnChange = (e) => {
+  onCompanyNameChange = (e) => {
     const name = e.target.value;
     this.setState(() => ({ name }));
-    console.log(this.state.name)
   }
 
-  addressOnChange = (e) => {
+  onAddressChange = (e) => {
     const address = e.target.value;
     this.setState(() => ({ address }));
   }
@@ -53,7 +52,7 @@ class SubTaskCreateForm extends Component {
           component="input" 
           type="text" 
           placeholder="Company Name"
-          onChange={this.companyNameOnChange} 
+          onChange={this.onCompanyNameChange} 
           value={this.state.name}
         />
         <label>Address</label>
@@ -62,7 +61,7 @@ class SubTaskCreateForm extends Component {
           component="input" 
           type="text"
           placeholder="Company Address"
-          onChange={this.addressOnChange} 
+          onChange={this.onAddressChange} 
           value={this.state.address}
         />
         <button>Submit Company</button>
