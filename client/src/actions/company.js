@@ -1,8 +1,8 @@
 import uuid from 'uuid';
 
 const addCompany = ({
-	latitude = 0,
-	longitude = 0,
+	lat = 0,
+	lng = 0,
 	name = '',
 	category = '',
 	description = '',
@@ -11,8 +11,8 @@ const addCompany = ({
 	type: 'ADD_COMPANY',
 	company: {
 		id: uuid(),
-		latitude,
-		longitude,
+		lat,
+		lng,
 		name,
 		category,
 		description,

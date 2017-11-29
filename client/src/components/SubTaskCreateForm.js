@@ -29,7 +29,7 @@ class SubTaskCreateForm extends Component {
     let address = this.state.address;
     geocoder.geocode({ 'address': address }, ((results, status) => { 
       if (status === 'OK') {
-        this.props.handleFormSubmit({
+        this.props.onSubmit({
           id: uuid(),
           name: this.state.name,
           address,

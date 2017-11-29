@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
 import { mapsApiKey } from '../config'
 import SubTaskCreateForm from './SubTaskCreateForm'
+import { addCompany } from '../actions/company'
 
 import GoogleMapReact from 'google-map-react'
 
@@ -13,40 +15,20 @@ const MarkerPoints = ({ text }) =>
   </div> 
 
 
-class MapPage extends Component {
-constructor() {
-  super()
-
-  this.state = {
-    addressList: []
-  }
-}
-
-onSubmit = ({ id, name, address, lat, lng }) => {
-  this.setState(() => ({ addressList: this.state.addressList.concat([{
-    id,
-    name,
-    address,
-    lat,
-    lng
-  }])}))
-}
-
-logAddresses = () => { (console.log(this.state.addressList))}
-
-  render() {
-    return (
+const MapPage = (props) => (
         <div>
         This is the maps page
         <SubTaskCreateForm 
-          handleFormSubmit={this.onSubmit}
+          onSubmit={(company) => {
+            props.dispatch(addCompany(company))
+          }}
         />
         <div style={{ height: "16em", width: "16em" }}>
           <GoogleMapReact
             center={{ lat: 40.0150, lng: -105.2705 }}
             defaultZoom={ 11 }
             bootstrapURLKeys={{ key: mapsApiKey }}>
-            {this.state.addressList.map((company) => {
+            {props.company.map((company) => {
               return <MarkerPoints 
                 key={company.id}
                 lat={company.lat}
@@ -56,13 +38,15 @@ logAddresses = () => { (console.log(this.state.addressList))}
             })}
             
           </GoogleMapReact>
-          <br/>
-          <button onClick={this.logAddresses}>log addresses</button>
           
         </div>
       </div>
-    )
+)
+
+const mapStateToProps = (state, props) => {
+  return {
+    company: state.company
   }
 }
 
-export default MapPage
+export default connect(mapStateToProps)(MapPage)
