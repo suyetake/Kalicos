@@ -1,27 +1,23 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 import App from './components/App'
 import registerServiceWorker from './registerServiceWorker'
 import { BrowserRouter } from 'react-router-dom'
-import reducer from './reducers'
+import { addCompany } from './actions/company'
+import configureStore from './store/configureStore'
 
-import { createStore, applyMiddleware, compose } from 'redux'
-import thunkMiddleware from 'redux-thunk'
-import { createLogger } from 'redux-logger'
 import { Provider } from 'react-redux'
+import { ds1, ds2, ds3 } from './dataSample'
 
 
-const loggerMiddleware = createLogger()
+const store = configureStore();
 
-const store = createStore(
-  reducer,
-  compose(
-    applyMiddleware( thunkMiddleware, loggerMiddleware ),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-  )
-)
+store.dispatch(addCompany(ds1))
+store.dispatch(addCompany(ds2))
+store.dispatch(addCompany(ds3))
 
-ReactDOM.render(
+
+render(
   <Provider store={ store }>
     <BrowserRouter>
       <App />
