@@ -1,6 +1,6 @@
 const companiesReducerDefaultState = [];
 
-const companyReducer = (state = companiesReducerDefaultState, action) => {
+const companiesReducer = (state = companiesReducerDefaultState, action) => {
 	switch (action.type) {
 		case 'ADD_COMPANY':
 			return [
@@ -12,4 +12,4 @@ const companyReducer = (state = companiesReducerDefaultState, action) => {
 	}
 };
 
-export default companyReducer;
+export default companiesReducer;

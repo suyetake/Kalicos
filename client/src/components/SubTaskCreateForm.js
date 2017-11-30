@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import uuid from 'uuid'
 
 class SubTaskCreateForm extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      addressList: [],
       name: '',
-      address: ''
+      address: '',
+      description: '',
+      category: ''
     }
   }
 
-  onCompanyNameChange = (e) => {
+  onNameChange = (e) => {
     const name = e.target.value;
     this.setState(() => ({ name }));
   }
@@ -23,6 +23,16 @@ class SubTaskCreateForm extends Component {
     this.setState(() => ({ address }));
   }
 
+  onDescriptionChange = (e) => {
+    const description = e.target.value;
+    this.setState(() => ({ description }));
+  }
+
+  onCategoryChange = (e) => {
+    const category = e.target.value;
+    this.setState(() => ({ category }));
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
     const geocoder = new window.google.maps.Geocoder();
@@ -30,9 +40,10 @@ class SubTaskCreateForm extends Component {
     geocoder.geocode({ 'address': address }, ((results, status) => { 
       if (status === 'OK') {
         this.props.onSubmit({
-          id: uuid(),
           name: this.state.name,
           address,
+          description: this.state.description,
+          category: this.state.category,
           lat: results[0].geometry.location.lat(),
           lng: results[0].geometry.location.lng()
         })
@@ -52,17 +63,36 @@ class SubTaskCreateForm extends Component {
           component="input" 
           type="text" 
           placeholder="Company Name"
-          onChange={this.onCompanyNameChange} 
+          onChange={this.onNameChange} 
           value={this.state.name}
         />
         <label>Address</label>
         <Field 
-          name="description" 
+          name="address" 
           component="input" 
           type="text"
           placeholder="Company Address"
           onChange={this.onAddressChange} 
           value={this.state.address}
+        />
+        <br/>
+        <label>Description</label>
+        <Field 
+          name="description" 
+          component="input" 
+          type="text"
+          placeholder="Company Description"
+          onChange={this.onDescriptionChange} 
+          value={this.state.description}
+        />
+        <label>Category</label>
+        <Field 
+          name="category" 
+          component="input" 
+          type="text"
+          placeholder="Museum/NonProfit/etc"
+          onChange={this.onCategoryChange} 
+          value={this.state.category}
         />
         <button>Submit Company</button>
       </form>

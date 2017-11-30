@@ -2,7 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { mapsApiKey } from '../config'
 import SubTaskCreateForm from './SubTaskCreateForm'
-import { addCompany } from '../actions/company'
+import CompanyListFilters from './CompanyListFilters'
+import { addCompany } from '../actions/companies'
+import selectCompanies from '../selectors/companies'
 
 import GoogleMapReact from 'google-map-react'
 
@@ -16,36 +18,39 @@ const MarkerPoints = ({ text }) =>
 
 
 const MapPage = (props) => (
-        <div>
-        This is the maps page
-        <SubTaskCreateForm 
-          onSubmit={(company) => {
-            props.dispatch(addCompany(company))
-          }}
-        />
-        <div style={{ height: "16em", width: "16em" }}>
-          <GoogleMapReact
-            center={{ lat: 40.0150, lng: -105.2705 }}
-            defaultZoom={ 11 }
-            bootstrapURLKeys={{ key: mapsApiKey }}>
-            {props.company.map((company) => {
-              return <MarkerPoints 
-                key={company.id}
-                lat={company.lat}
-                lng={company.lng}
-                text={company.name}
-              />
-            })}
-            
-          </GoogleMapReact>
-          
-        </div>
-      </div>
+  <div>
+  {console.log('map props', props)}
+    This is the maps page
+    <SubTaskCreateForm 
+      onSubmit={(company) => {
+        props.dispatch(addCompany(company))
+      }}
+    />
+    <CompanyListFilters />
+    <div style={{ height: "16em", width: "16em" }}>
+      <GoogleMapReact
+        center={{ lat: 40.0150, lng: -105.2705 }}
+        defaultZoom={ 11 }
+        bootstrapURLKeys={{ key: mapsApiKey }}>
+        {props.visibleCompanies.map((company) => {
+          return <MarkerPoints 
+            key={company.id}
+            lat={company.lat}
+            lng={company.lng}
+            text={company.name}
+          />
+        })}
+        
+      </GoogleMapReact>
+      
+    </div>
+  </div>
 )
 
 const mapStateToProps = (state, props) => {
   return {
-    company: state.company
+    companies: state.companies,
+    visibleCompanies: selectCompanies(state.companies, state.filters)
   }
 }
 
