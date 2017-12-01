@@ -1,9 +1,9 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { reducer as formReducer } from 'redux-form'
-import companiesReducer from '../reducers/companies'
+import organizationsReducer from '../reducers/organizations'
 import filterReducer from '../reducers/filters'
 import thunkMiddleware from 'redux-thunk'
-import { createLogger } from 'redux-logger'
+// import { createLogger } from 'redux-logger'
 
 // const loggerMiddleware = createLogger()
 
@@ -11,7 +11,7 @@ export default () => {
 const store = createStore(
 	combineReducers({
 		form: formReducer,
-		companies: companiesReducer,
+		organizations: organizationsReducer,
 		filters: filterReducer
 	}),
 	compose(

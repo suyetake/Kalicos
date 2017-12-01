@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-class SubTaskCreateForm extends Component {
+class OrganizationForm extends Component {
   constructor(props) {
     super(props)
 
@@ -35,6 +35,7 @@ class SubTaskCreateForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    console.log(window.google)
     const geocoder = new window.google.maps.Geocoder();
     let address = this.state.address;
     geocoder.geocode({ 'address': address }, ((results, status) => { 
@@ -57,12 +58,12 @@ class SubTaskCreateForm extends Component {
     return (
       <div>
       <form onSubmit={this.onSubmit}>
-        <label>Company</label>
+        <label>Organization</label>
         <Field 
           name="title" 
           component="input" 
           type="text" 
-          placeholder="Company Name"
+          placeholder="Organization Name"
           onChange={this.onNameChange} 
           value={this.state.name}
         />
@@ -71,7 +72,7 @@ class SubTaskCreateForm extends Component {
           name="address" 
           component="input" 
           type="text"
-          placeholder="Company Address"
+          placeholder="Organization Address"
           onChange={this.onAddressChange} 
           value={this.state.address}
         />
@@ -81,7 +82,7 @@ class SubTaskCreateForm extends Component {
           name="description" 
           component="input" 
           type="text"
-          placeholder="Company Description"
+          placeholder="Organization Description"
           onChange={this.onDescriptionChange} 
           value={this.state.description}
         />
@@ -94,7 +95,7 @@ class SubTaskCreateForm extends Component {
           onChange={this.onCategoryChange} 
           value={this.state.category}
         />
-        <button>Submit Company</button>
+        <button>Add Organization</button>
       </form>
 
       <br/>
@@ -111,7 +112,7 @@ class SubTaskCreateForm extends Component {
   }
 }
 
-SubTaskCreateForm = reduxForm({ form: 'createSubTask' })(SubTaskCreateForm)
+OrganizationForm = reduxForm({ form: 'createOrganizationForm' })(OrganizationForm)
 
 
-export default SubTaskCreateForm
+export default OrganizationForm

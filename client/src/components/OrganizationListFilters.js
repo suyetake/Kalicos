@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { setNameFilter, setDescriptionFilter, setAddressFilter, setCategoryFilter } from '../actions/filters'
-import selectCompanies from '../selectors/companies'
+import selectOrganizations from '../selectors/organizations'
 
 
-const CompanyListFilters = (props) => (
+const OrganizationListFilters = (props) => (
     <div>
 		<p>Filters by:</p>
 		<input 
@@ -45,10 +45,10 @@ const CompanyListFilters = (props) => (
 
 const mapStateToProps = (state, props) => {
   return {
-    companies: state.companies,
+    organizations: state.organizations,
     filters: state.filters,
-    visibleCompanies: selectCompanies(state.companies, state.filters)
+    visibleOrganizations: selectOrganizations(state.organizations, state.filters)
   }
 }
 
-export default connect(mapStateToProps)(CompanyListFilters)
+export default connect(mapStateToProps)(OrganizationListFilters)

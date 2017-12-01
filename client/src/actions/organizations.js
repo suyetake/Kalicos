@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 
-const addCompany = ({
+const addOrganization = ({
 	lat = 0,
 	lng = 0,
 	name = '',
@@ -8,8 +8,8 @@ const addCompany = ({
 	description = '',
 	address = ''
 }) => ({
-	type: 'ADD_COMPANY',
-	company: {
+	type: 'ADD_ORGANIZATION',
+	organization: {
 		id: uuid(),
 		lat,
 		lng,
@@ -20,5 +20,5 @@ const addCompany = ({
 	}
 });
 
-export { addCompany };
+export { addOrganization }
 
