@@ -18,7 +18,13 @@ const addOrganization = ({
 		description,
 		address
 	}
-});
+})
 
-export { addOrganization }
+const editOrganization = (id, updates) => ({
+	type: 'EDIT_ORGANIZATION',
+	id,
+	updates
+})
+
+export { addOrganization, editOrganization }
 

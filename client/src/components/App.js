@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 import MapPage from './MapPage'
 import AddOrganizationPage from './AddOrganizationPage'
+import EditOrganizationPage from './EditOrganizationPage'
 
 const Header = () => (
   <div>
@@ -9,6 +10,7 @@ const Header = () => (
       <li><Link to="/">Home</Link></li>
       <li><Link to="/maps">Maps</Link></li>
       <li><Link to="/add">Add Org</Link></li>
+      <li><Link to="/edit">Edit Org</Link></li>
       <li><Link to="/about">About</Link></li>
     </ul>
   </div>
@@ -31,6 +33,7 @@ class App extends Component {
         <Route exact path="/" component={ Home } />
         <Route path="/about" component={ About } />
         <Route path="/add" component={ AddOrganizationPage } />
+        <Route path="/edit/:id" component={ EditOrganizationPage } />
         <Route path="/maps" component={ MapPage } />
       </div>
     )

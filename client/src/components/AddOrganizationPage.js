@@ -15,7 +15,7 @@ const AddOrganizationPage = (props) => (
 	        	props.dispatch(addOrganization(organization))
 	      }}
 		/>
-	{/* GoogleMapReact must be present for received google.maps in organization to be defined */}
+	{/* GoogleMapReact must be present for google.maps to be passed up */}
 		<GoogleMapReact
 	        center={{ lat: 40.0150, lng: -105.2705 }}
 	        defaultZoom={ 11 }

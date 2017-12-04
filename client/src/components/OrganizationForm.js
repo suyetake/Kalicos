@@ -6,10 +6,10 @@ class OrganizationForm extends Component {
     super(props)
 
     this.state = {
-      name: '',
-      address: '',
-      description: '',
-      category: ''
+      name: props.organization ? props.organization.name : '',
+      address: props.organization ? props.organization.address : '',
+      description: props.organization ? props.organization.description : '',
+      category: props.organization ? props.organization.category : '',
     }
   }
 
