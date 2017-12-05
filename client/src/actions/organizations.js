@@ -1,6 +1,7 @@
 import uuid from 'uuid';
 
 const addOrganization = ({
+	id = uuid(),
 	lat = 0,
 	lng = 0,
 	name = '',
@@ -10,7 +11,7 @@ const addOrganization = ({
 }) => ({
 	type: 'ADD_ORGANIZATION',
 	organization: {
-		id: uuid(),
+		id,
 		lat,
 		lng,
 		name,

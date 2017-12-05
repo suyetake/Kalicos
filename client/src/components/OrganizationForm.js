@@ -1,103 +1,63 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-class OrganizationForm extends Component {
-  constructor(props) {
-    super(props)
 
-    this.state = {
-      name: props.organization ? props.organization.name : '',
-      address: props.organization ? props.organization.address : '',
-      description: props.organization ? props.organization.description : '',
-      category: props.organization ? props.organization.category : '',
-    }
-  }
+// onSubmit = (e) => {
+//     e.preventDefault();
+//     const geocoder = new window.google.maps.Geocoder();
+//     let address = this.state.address;
+//     geocoder.geocode({ 'address': address }, ((results, status) => { 
+//       if (status === 'OK') {
+//         this.props.onSubmit({
+//           name: this.state.name,
+//           address,
+//           description: this.state.description,
+//           category: this.state.category,
+//           lat: results[0].geometry.location.lat(),
+//           lng: results[0].geometry.location.lng()
+//         })
+//       } else {
+//         console.log('Geocode not successful ', status)
+//       }
+//     }))
+//   }
 
-  onNameChange = (e) => {
-    const name = e.target.value;
-    this.setState(() => ({ name }));
-  }
 
-  onAddressChange = (e) => {
-    const address = e.target.value;
-    this.setState(() => ({ address }));
-  }
-
-  onDescriptionChange = (e) => {
-    const description = e.target.value;
-    this.setState(() => ({ description }));
-  }
-
-  onCategoryChange = (e) => {
-    const category = e.target.value;
-    this.setState(() => ({ category }));
-  }
-
-  onSubmit = (e) => {
-    e.preventDefault();
-    console.log(window.google)
-    const geocoder = new window.google.maps.Geocoder();
-    let address = this.state.address;
-    geocoder.geocode({ 'address': address }, ((results, status) => { 
-      if (status === 'OK') {
-        this.props.onSubmit({
-          name: this.state.name,
-          address,
-          description: this.state.description,
-          category: this.state.category,
-          lat: results[0].geometry.location.lat(),
-          lng: results[0].geometry.location.lng()
-        })
-      } else {
-        console.log('Geocode not successful ', status)
-      }
-    }))
-  }
-
-  render() {
-    return (
-      <div>
-      <form onSubmit={this.onSubmit}>
+let OrganizationForm = props => {
+  return (
+    <div>
+      <form onSubmit={props.handleSubmit}>
         <label>Organization</label>
-        <Field 
-          name="title" 
-          component="input" 
-          type="text" 
-          placeholder="Organization Name"
-          onChange={this.onNameChange} 
-          value={this.state.name}
-        />
-        <label>Address</label>
-        <Field 
-          name="address" 
-          component="input" 
-          type="text"
-          placeholder="Organization Address"
-          onChange={this.onAddressChange} 
-          value={this.state.address}
-        />
-        <br/>
-        <label>Description</label>
-        <Field 
-          name="description" 
-          component="input" 
-          type="text"
-          placeholder="Organization Description"
-          onChange={this.onDescriptionChange} 
-          value={this.state.description}
-        />
-        <label>Category</label>
-        <Field 
-          name="category" 
-          component="input" 
-          type="text"
-          placeholder="Museum/NonProfit/etc"
-          onChange={this.onCategoryChange} 
-          value={this.state.category}
-        />
-        <button>Add Organization</button>
+          <Field 
+            name="name" 
+            component="input" 
+            type="text" 
+            placeholder="Organization Name"
+          />
+          <label>Address</label>
+          <Field 
+            name="address" 
+            component="input" 
+            type="text"
+            placeholder="Organization Address"
+          />
+          <br/>
+          <label>Description</label>
+          <Field 
+            name="description" 
+            component="input" 
+            type="text"
+            placeholder="Organization Description"
+          />
+          <label>Category</label>
+          <Field 
+            name="category" 
+            component="input" 
+            type="text"
+            placeholder="Museum/NonProfit/etc"
+          />
+          <button>Add Organization</button>
       </form>
-
       <br/>
       <p>Addresses:</p>
       <li>1600 Range St #101, Boulder, CO 80301</li>
@@ -106,13 +66,13 @@ class OrganizationForm extends Component {
       <p>Haoway</p>
       <li>1777 Broadway, Boulder, CO 80302</li>
       <p>Courthouse</p>
-      <br/>
-      </div>
-    )
-  }
+
+    </div>
+  )
 }
 
-OrganizationForm = reduxForm({ form: 'createOrganizationForm' })(OrganizationForm)
-
+OrganizationForm = reduxForm({
+  form: 'createOrgForm'
+})(OrganizationForm)
 
 export default OrganizationForm
