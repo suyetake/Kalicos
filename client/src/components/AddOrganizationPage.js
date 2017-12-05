@@ -1,44 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { mapsApiKey } from '../config'
-import OrganizationForm from './OrganizationForm'
+import GeocodeAddress from './GeocodeAddress'
 import { addOrganization } from '../actions/organizations'
-import GoogleMapReact from 'google-map-react'
 
 
-
-
-class AddOrganizationPage extends React.Component {
-	submit = (org) => {
-		const geocoder = new window.google.maps.Geocoder();
-		let address = org.address
-		geocoder.geocode({ 'address': address }, ((results, status) => {
-			if (status === 'OK') {
-				this.props.dispatch(addOrganization({
-					...org,
-					lat: results[0].geometry.location.lat(),
-          			lng: results[0].geometry.location.lng()
-				}))
-			} else {
-       			 console.log('Geocode not successful ', status)
-      		}
-		}))
-	    console.log(org)
-	  }
-	  render() {
-	    return (
+const AddOrganizationPage = (props) => (
 	    	<div>
-		    	<OrganizationForm 
-		    		onSubmit={this.submit} 
+		    	<GeocodeAddress 
+		    		onSubmit={(org) => {
+		    			props.dispatch(addOrganization(org))
+		    		}} 
 		    	/>
-		    	<GoogleMapReact
-			        center={{ lat: 40.0150, lng: -105.2705 }}
-			        defaultZoom={ 11 }
-			        bootstrapURLKeys={{ key: mapsApiKey }}>
-			    </GoogleMapReact>
 			</div>
-	    )
-	  }
-}
+)
 
 export default connect()(AddOrganizationPage)

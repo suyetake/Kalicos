@@ -56,7 +56,7 @@ let OrganizationForm = props => {
             type="text"
             placeholder="Museum/NonProfit/etc"
           />
-          <button>Add Organization</button>
+          <button type="submit">Add Organization</button>
       </form>
       <br/>
       <p>Addresses:</p>
