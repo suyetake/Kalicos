@@ -7,7 +7,7 @@ let LandingForm = (props) => {
 		<div>
 			<form onSubmit={props.handleSubmit}>
 				<Field 
-					name="mapCenter"
+					name="location"
 					component="input"
 					type="text"
 					placeholder="Enter your location"

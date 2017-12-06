@@ -40,7 +40,7 @@ const MapPage = (props) => (
 
 const mapStateToProps = (state, props) => {
   return {
-    latLng: state.userControls,
+    latLng: state.userControls.mapCenter,
     visibleOrganizations: selectOrganizations(state.organizations, state.filters)
   }
 }

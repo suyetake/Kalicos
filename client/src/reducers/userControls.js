@@ -1,6 +1,9 @@
 const userControlsReducerDefaultState = {
-	lat: 40.0149856,
-	lng: -105.2705456
+	mapCenter: {
+		lat: 40.0149856,
+		lng: -105.2705456
+	},
+	modal: ''
 }
 
 const userControlsReducer = (state = userControlsReducerDefaultState, action) => {
@@ -8,8 +11,7 @@ const userControlsReducer = (state = userControlsReducerDefaultState, action) =>
 		case 'SET_MAP_CENTER':
 			return {
 				...state,
-				lat: action.lat,
-				lng: action.lng
+				mapCenter: action.mapCenter
 			}
 		case 'SET_SELECTED_MODAL':
 			return {
