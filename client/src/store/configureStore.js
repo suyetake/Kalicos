@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from 'redux-thunk'
 import organizationsReducer from '../reducers/organizations'
 import filterReducer from '../reducers/filters'
+import userControls from '../reducers/userControls'
 // import { createLogger } from 'redux-logger'
 
 // const loggerMiddleware = createLogger()
@@ -12,7 +13,8 @@ const store = createStore(
 	combineReducers({
 		organizations: organizationsReducer,
 		form: formReducer,
-		filters: filterReducer
+		filters: filterReducer,
+		userControls: userControls
 	}),
 	compose(
 	    applyMiddleware( thunkMiddleware ),

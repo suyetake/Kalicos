@@ -1,17 +1,29 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import GeocodeAddress from './GeocodeAddress'
+import OrganizationForm from './OrganizationForm'
 import { addOrganization } from '../actions/organizations'
+import { geocodeAddress } from '../utils'
 
 
-const AddOrganizationPage = (props) => (
+class AddOrganizationPage extends React.Component {
+
+	handleSubmit = (organization) => {
+		geocodeAddress(organization.address)
+  			.then(latLng => this.props.dispatch(addOrganization({
+				...organization,
+				lat: latLng.lat,
+				lng: latLng.lng
+			})))
+	}
+	render() {
+		return (
 	    	<div>
-		    	<GeocodeAddress 
-		    		onSubmit={(org) => {
-		    			props.dispatch(addOrganization(org))
-		    		}} 
+	    		<OrganizationForm 
+		    		onSubmit={this.handleSubmit} 
 		    	/>
 			</div>
-)
+		)
+	}
+}
 
 export default connect()(AddOrganizationPage)

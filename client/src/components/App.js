@@ -3,6 +3,7 @@ import { Route, Link } from 'react-router-dom'
 import MapPage from './MapPage'
 import AddOrganizationPage from './AddOrganizationPage'
 import EditOrganizationPage from './EditOrganizationPage'
+import LandingPage from './LandingPage'
 
 const Header = () => (
   <div>
@@ -16,9 +17,6 @@ const Header = () => (
   </div>
 )
 
-const Home = () => (
-  <div> This is the landing ... testing deployment</div>
-)
 
 const About = () => (
   <div> This is the about page </div>
@@ -30,7 +28,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Route exact path="/" component={ Home } />
+        <Route exact path="/" component={ LandingPage } />
         <Route path="/about" component={ About } />
         <Route path="/add" component={ AddOrganizationPage } />
         <Route path="/edit/:id" component={ EditOrganizationPage } />

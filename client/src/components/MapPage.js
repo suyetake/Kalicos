@@ -21,7 +21,7 @@ const MapPage = (props) => (
     <OrganizationListFilters />
     <div style={{ height: "30em", width: "100%" }}>
       <GoogleMapReact
-        center={{ lat: 40.0150, lng: -105.2705 }}
+        center={{ lat: props.latLng.lat, lng: props.latLng.lng }}
         defaultZoom={ 11 }
         bootstrapURLKeys={{ key: mapsApiKey }}>
         {props.visibleOrganizations.map((organization) => {
@@ -40,6 +40,7 @@ const MapPage = (props) => (
 
 const mapStateToProps = (state, props) => {
   return {
+    latLng: state.userControls,
     visibleOrganizations: selectOrganizations(state.organizations, state.filters)
   }
 }

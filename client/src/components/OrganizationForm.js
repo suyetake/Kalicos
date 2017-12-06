@@ -2,28 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 
-// onSubmit = (e) => {
-//     e.preventDefault();
-//     const geocoder = new window.google.maps.Geocoder();
-//     let address = this.state.address;
-//     geocoder.geocode({ 'address': address }, ((results, status) => { 
-//       if (status === 'OK') {
-//         this.props.onSubmit({
-//           name: this.state.name,
-//           address,
-//           description: this.state.description,
-//           category: this.state.category,
-//           lat: results[0].geometry.location.lat(),
-//           lng: results[0].geometry.location.lng()
-//         })
-//       } else {
-//         console.log('Geocode not successful ', status)
-//       }
-//     }))
-//   }
-
-
-let OrganizationForm = props => {
+let OrganizationForm = (props) => {
   return (
     <div>
       <form onSubmit={props.handleSubmit}>
@@ -72,7 +51,7 @@ let OrganizationForm = props => {
 }
 
 OrganizationForm = reduxForm({
-  form: 'createOrgForm'
+  form: 'organizationForm'
 })(OrganizationForm)
 
 export default OrganizationForm
