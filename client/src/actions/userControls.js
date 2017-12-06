@@ -1,7 +1,6 @@
-const setMapCenter = ({ lat, lng}) => ({
+const setMapCenter = (mapCenter) => ({
 	type: 'SET_MAP_CENTER',
-	lat,
-	lng
+	mapCenter
 })
 const setSelectedModal = (id) => ({
 	type: 'SET_SELECTED_MODAL',
