@@ -19,7 +19,7 @@ const organizationsReducer = (state = organizationsReducerDefaultState, action) 
 				}
 			})
 		default:
-		return state;
+			return state;
 	}
 };
 
