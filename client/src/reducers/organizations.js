@@ -1,3 +1,5 @@
+// import * as types from '../actions/actionTypes'
+
 const organizationsReducerDefaultState = [];
 
 const organizationsReducer = (state = organizationsReducerDefaultState, action) => {

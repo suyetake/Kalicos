@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import OrganizationForm from './OrganizationForm'
 import { addOrganization } from '../actions/organizations'
 import { geocodeAddress } from '../utils'
+import {reset} from 'redux-form';
 
 
 class AddOrganizationPage extends React.Component {
@@ -14,6 +15,7 @@ class AddOrganizationPage extends React.Component {
 				lat: latLng.lat,
 				lng: latLng.lng
 			})))
+  		this.props.dispatch(reset('organizationForm'))
 	}
 	render() {
 		return (
