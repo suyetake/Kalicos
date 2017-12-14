@@ -3,8 +3,7 @@ const userControlsReducerDefaultState = {
 		lat: 40.0149856,
 		lng: -105.2705456
 	},	
-	modal: undefined,
-	editOrg: undefined
+	modal: ''
 }
 
 const userControlsReducer = (state = userControlsReducerDefaultState, action) => {
@@ -18,11 +17,6 @@ const userControlsReducer = (state = userControlsReducerDefaultState, action) =>
 			return {
 				...state,
 				modal: action.id
-			}
-		case 'LOAD_EDIT_DATA':
-			return {
-				...state,
-				editOrg: action.num
 			}
 		default:
 			return state

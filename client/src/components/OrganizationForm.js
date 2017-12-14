@@ -1,13 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-// import { loadEditData } from '../actions/userControls'
-
 
 let OrganizationForm = (props) => {
   return (
     <div>
-
       <form onSubmit={props.handleSubmit}>
         <label>Organization</label>
           <Field 
@@ -38,7 +35,7 @@ let OrganizationForm = (props) => {
             type="text"
             placeholder="Museum/NonProfit/etc"
           />
-          <button type="submit">Add Organization</button>
+          <button type="submit">Submit Organization</button>
       </form>
       <br/>
       <p>Addresses:</p>
@@ -57,9 +54,11 @@ OrganizationForm = reduxForm({
 })(OrganizationForm)
 
 OrganizationForm = connect(
-  ( state, props ) => ({
-    initialValues: state.organizations[state.userControls.editOrg] 
-  })
+  ( state, props ) => {
+    return {
+      initialValues: props.organization
+    }
+  }
 )(OrganizationForm)
 
 
