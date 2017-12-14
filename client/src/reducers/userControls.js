@@ -2,7 +2,7 @@ const userControlsReducerDefaultState = {
 	mapCenter: {
 		lat: 40.0149856,
 		lng: -105.2705456
-	},	
+	},
 	modal: ''
 }
 

@@ -14,7 +14,7 @@ const organizationsReducer = (state = organizationsReducerDefaultState, action) 
 				if (organization.id === action.id) {
 					return {
 						...organization,
-						...organization.updates
+						...action.updates
 					}
 				} else {
 					return organization
