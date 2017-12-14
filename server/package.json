@@ -1,0 +1,38 @@
+{
+  "name": "kalios-rest",
+  "version": "0.0.0",
+  "description": "Rest API for Kalios project",
+  "main": "server.js",
+  "scripts": {
+    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha tests/**/*.test.js",
+    "test:watch": "nodemon --exec \" npm i && npm test\"",
+    "start": "npm run lint && node server.js",
+    "dev": "./node_modules/.bin/nodemon --exec \"npm i && npm start\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint **/*.js --fix && eslint server.js --fix"
+  },
+  "author": "Kalios Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.5",
+    "helmet": "^3.8.1",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.13",
+    "morgan": "^1.8.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.12.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^3.5.3",
+    "nodemon": "^1.12.1",
+    "supertest": "^3.0.0"
+  }
+}
