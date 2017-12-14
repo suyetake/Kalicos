@@ -1,6 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-
 
 let OrganizationForm = (props) => {
   return (
@@ -35,7 +35,7 @@ let OrganizationForm = (props) => {
             type="text"
             placeholder="Museum/NonProfit/etc"
           />
-          <button type="submit">Add Organization</button>
+          <button type="submit">Submit Organization</button>
       </form>
       <br/>
       <p>Addresses:</p>
@@ -45,7 +45,6 @@ let OrganizationForm = (props) => {
       <p>Haoway</p>
       <li>1777 Broadway, Boulder, CO 80302</li>
       <p>Courthouse</p>
-
     </div>
   )
 }
@@ -53,5 +52,14 @@ let OrganizationForm = (props) => {
 OrganizationForm = reduxForm({
   form: 'organizationForm'
 })(OrganizationForm)
+
+OrganizationForm = connect(
+  ( state, props ) => {
+    return {
+      initialValues: props.organization
+    }
+  }
+)(OrganizationForm)
+
 
 export default OrganizationForm

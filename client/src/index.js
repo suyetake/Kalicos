@@ -9,7 +9,6 @@ import getVisibleOrganizations from './selectors/organizations'
 
 import { Provider } from 'react-redux'
 import { ds1, ds2, ds3 } from './dataSample'
-// import { setNameFilter } from './actions/filters'
 
 
 const store = configureStore();
@@ -24,7 +23,14 @@ store.subscribe(() => {
 store.dispatch(addOrganization(ds1))
 store.dispatch(addOrganization(ds2))
 store.dispatch(addOrganization(ds3))
-// store.dispatch(setNameFilter('cu'))
+// store.dispatch(editOrganization(2, {
+//   address:"47384374328 Arapahoe Ave.",
+//   category:"muse",
+//   description:"The mi.",
+// }))
+
+
+
 
 render(
   <Provider store={ store }>

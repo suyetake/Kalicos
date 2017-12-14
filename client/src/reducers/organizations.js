@@ -1,3 +1,5 @@
+// import * as types from '../actions/actionTypes'
+
 const organizationsReducerDefaultState = [];
 
 const organizationsReducer = (state = organizationsReducerDefaultState, action) => {
@@ -12,7 +14,7 @@ const organizationsReducer = (state = organizationsReducerDefaultState, action) 
 				if (organization.id === action.id) {
 					return {
 						...organization,
-						...organization.updates
+						...action.updates
 					}
 				} else {
 					return organization

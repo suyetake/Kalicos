@@ -7,12 +7,12 @@ import { setMapCenter } from '../actions/userControls'
 
 class LandingPage extends React.Component {
 
-	handleSubmit = (address) => {
-		geocodeAddress(address.mapCenter)
+
+	handleSubmit = (location) => {
+		geocodeAddress(location.location)
 			.then(latLng => this.props.dispatch(setMapCenter(latLng)))
 		this.props.history.push('/maps')
 	}
-
 	render() {
 		return (
 			<LandingForm 
