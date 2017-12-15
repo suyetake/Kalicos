@@ -16,6 +16,7 @@ const users = [
 ]
 
 const populateUsers = (done) => {
+  console.log('POPULATED USERS')
   Users
     .remove({})
     .then(() => {
