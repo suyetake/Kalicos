@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import OrganizationForm from './OrganizationForm'
 import { editOrganization } from '../actions/organizations'
-// import { loadEditData } from '../actions/userControls'
+import { geocodeAddress } from '../utils'
 
 
 class EditOrganizationPage extends React.Component {
@@ -14,8 +14,15 @@ class EditOrganizationPage extends React.Component {
 				<OrganizationForm 
 					organization={props.organization}
 					onSubmit={(organization) => {
-						console.log('in edit', props.match.params.id, organization)
-						props.dispatch(editOrganization(props.match.params.id, organization))
+						geocodeAddress(organization.address)
+				  			.then(latLng => this.props.dispatch(editOrganization(
+				  				props.match.params.id,
+				  				{
+									...organization,
+									lat: latLng.lat,
+									lng: latLng.lng
+								}
+							)))						
 					}}
 					match={parseInt(props.match.params.id, 10)}
 				/>

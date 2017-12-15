@@ -5,7 +5,6 @@ import OrganizationListFilters from './OrganizationListFilters'
 import selectOrganizations from '../selectors/organizations'
 import { setSelectedModal } from '../actions/userControls'
 import MapModalView from './MapModalView'
-import onClickOutside from 'react-onclickoutside'
 
 import GoogleMapReact from 'google-map-react'
 
