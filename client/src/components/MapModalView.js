@@ -1,11 +1,15 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { setSelectedModal } from '../actions/userControls'
+import onClickOutside from 'react-onclickoutside'
 
-const MapModalView = ( { id, name, category, dispatch }) => {
+
+
+  const MapModalView = ( { id, name, category, dispatch }) => {
+
+
   return (
-    <div
+    <div 
     //   style={{
     //     position: 'relative', border: '2px solid black', backgroundColor: 'gray',
     //     height: 100, width: 100, top: 0, left: 0,    
@@ -21,6 +25,6 @@ const MapModalView = ( { id, name, category, dispatch }) => {
     )
 }
 
-export default connect()(MapModalView)
+export default onClickOutside(MapModalView)
 
 

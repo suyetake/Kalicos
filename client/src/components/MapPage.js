@@ -5,6 +5,7 @@ import OrganizationListFilters from './OrganizationListFilters'
 import selectOrganizations from '../selectors/organizations'
 import { setSelectedModal } from '../actions/userControls'
 import MapModalView from './MapModalView'
+import onClickOutside from 'react-onclickoutside'
 
 import GoogleMapReact from 'google-map-react'
 
@@ -21,37 +22,57 @@ const MarkerPoints = ({ text }) =>
 
 
 
-const MapPage = (props) => (
-  <div>
-    <OrganizationListFilters />
-    <div style={{ height: "30em", width: "100%" }}>
-      <GoogleMapReact
-        center={{ lat: props.latLng.lat, lng: props.latLng.lng }}
-        defaultZoom={ 11 }
-        bootstrapURLKeys={{ key: mapsApiKey }}
-        onChildClick={(e) => props.dispatch(setSelectedModal(e))}
-        >
-        {props.visibleOrganizations.map((organization) => {
-          return <MarkerPoints 
-            key={organization.id}
-            lat={organization.lat}
-            lng={organization.lng}
-            text={organization.name}
-          />
-        })}
-      </GoogleMapReact>
-      
-        {props.selectedModal && props.visibleOrganizations.map((organization) => {
-          if (organization.id === props.selectedModal) {
-            return <MapModalView key={organization.id} {...organization} />
-          } else {
-            // removes console warning of arrow function return statement
-            return undefined
-          }
-        })}
-    </div>
-  </div>
-)
+class MapPage extends React.Component {
+
+  
+
+  componentWillUnmount() {
+    this.props.dispatch(setSelectedModal(''))
+  }
+
+  showEvent = (evt) => {
+    console.log(evt)
+  }
+
+
+  render() {
+    let props = this.props
+    return (
+      <div className='bubbler'>
+        <OrganizationListFilters />
+        <div style={{ height: "30em", width: "100%" }}>
+          <GoogleMapReact
+            center={{ lat: props.latLng.lat, lng: props.latLng.lng }}
+            defaultZoom={ 11 }
+            bootstrapURLKeys={{ key: mapsApiKey }}
+            onChildClick={(e) => props.dispatch(setSelectedModal(e))}
+            >
+            {props.visibleOrganizations.map((organization) => {
+              return <MarkerPoints 
+                key={organization.id}
+                lat={organization.lat}
+                lng={organization.lng}
+                text={organization.name}
+              />
+            })}
+          </GoogleMapReact>
+          
+            {props.selectedModal && props.visibleOrganizations.map((organization) => {
+              if (organization.id === props.selectedModal) {
+                return <MapModalView key={organization.id} {...organization} dispatch={props.dispatch}/>
+              } else {
+                // removes console warning of arrow function return statement
+                return null
+              }
+            })}
+        </div>
+      </div>
+    )
+  }
+}
+  
+    
+
 
 
 
