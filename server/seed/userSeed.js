@@ -28,8 +28,6 @@ const populateUsers = (done) => {
 
       return Promise.all(addUsers)
     })
-    .then(() => done())
-    .catch(err => done(err))
 }
 
 module.exports = {

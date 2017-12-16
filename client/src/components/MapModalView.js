@@ -5,20 +5,15 @@ import onClickOutside from 'react-onclickoutside'
 
 
 
-  const MapModalView = ( { id, name, category, dispatch }) => {
+  const MapModalView = ( { _id, name, category, dispatch }) => {
 
 
   return (
-    <div 
-    //   style={{
-    //     position: 'relative', border: '2px solid black', backgroundColor: 'gray',
-    //     height: 100, width: 100, top: 0, left: 0,    
-    //    }}
-    >
+    <div >
       <button onClick={() => dispatch(setSelectedModal({id: ''}))}>X</button>
-      <li>Edit <Link to={`/edit/${id}`}> {name}</Link>
+      <li>Edit <Link to={`/edit/${_id}`}> {name}</Link>
       </li>
-      <li>{id}</li>
+      <li>{_id}</li>
       <li>{name}</li>
       <li>{category}</li>
     </div>

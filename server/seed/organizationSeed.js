@@ -46,8 +46,6 @@ const populateOrganizations = (done) => {
 
       return Promise.all(addOrganizations)
     })
-    .then(() => done())
-    .catch(err => done(err + 'damn'))
 }
 
 module.exports = {

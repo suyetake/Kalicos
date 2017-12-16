@@ -11,7 +11,6 @@ const Header = () => (
       <li><Link to="/">Home</Link></li>
       <li><Link to="/maps">Maps</Link></li>
       <li><Link to="/add">Add Org</Link></li>
-      <li><Link to="/edit">Edit Org</Link></li>
       <li><Link to="/about">About</Link></li>
     </ul>
   </div>

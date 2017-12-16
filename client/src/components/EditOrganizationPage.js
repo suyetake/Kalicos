@@ -16,15 +16,15 @@ class EditOrganizationPage extends React.Component {
 					onSubmit={(organization) => {
 						geocodeAddress(organization.address)
 				  			.then(latLng => this.props.dispatch(editOrganization(
-				  				props.match.params.id,
+				  				props.match.params._id,
 				  				{
 									...organization,
-									lat: latLng.lat,
-									lng: latLng.lng
+									lat: latLng.latitude,
+									lng: latLng.longitude
 								}
 							)))						
 					}}
-					match={parseInt(props.match.params.id, 10)}
+					match={parseInt(props.match.params._id, 10)}
 				/>
 			</div>
 		)
@@ -33,7 +33,7 @@ class EditOrganizationPage extends React.Component {
 
 const mapStateToProps = (state, props) => {
 	return {
-		organization: state.organizations.find((organization) => organization.id === props.match.params.id)
+		organization: state.organizations.find((organization) => organization._id === props.match.params.id)
 	}
 }
 

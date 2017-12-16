@@ -33,10 +33,12 @@ module.exports = {
   searchByLocation(req, res) {
     const { address, category } = req.query
     // find address location
+    console.log('query request', req.query)
 
     lookupAddress(address)
       .then(response => {
         var {lat, lng} = response
+        console.log(response)
         // FIXME: solution for searching is hard coded and doesn't reflect actual distance
         // currently leaving hardcoded for testing purposes
         var find = Organizations.find({}, '-_id name address category description latitude longitude')
@@ -60,5 +62,17 @@ module.exports = {
         console.log(error)
         res.send({ error: error.message })
       })
+  },
+  getAllLocations(req, res) {
+    var find = Organizations.find({}, '_id name address category description latitude longitude')
+    find.exec(function (err, orgs) {
+      if (err) {
+        console.log(err)
+        res.send(err)
+      } else {
+        console.log(orgs)
+        res.send(orgs)
+      }
+    })
   }
 }

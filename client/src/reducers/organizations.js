@@ -1,3 +1,5 @@
+import { RECEIVE_ALL_ORGANIZATIONS } from '../actions/organizations'
+
 const organizationsReducerDefaultState = [];
 
 const organizationsReducer = (state = organizationsReducerDefaultState, action) => {
@@ -18,6 +20,11 @@ const organizationsReducer = (state = organizationsReducerDefaultState, action) 
 					return organization
 				}
 			})
+		case RECEIVE_ALL_ORGANIZATIONS:
+			return [
+				...state,
+				...action.data
+			]
 		default:
 			return state;
 	}

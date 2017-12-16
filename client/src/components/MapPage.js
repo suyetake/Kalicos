@@ -47,18 +47,20 @@ class MapPage extends React.Component {
             onChildClick={(e) => props.dispatch(setSelectedModal(e))}
             >
             {props.visibleOrganizations.map((organization) => {
-              return <MarkerPoints 
-                key={organization.id}
-                lat={organization.lat}
-                lng={organization.lng}
+              return (
+              <MarkerPoints 
+                key={organization._id}
+                lat={organization.latitude}
+                lng={organization.longitude}
                 text={organization.name}
               />
+              )
             })}
           </GoogleMapReact>
           
             {props.selectedModal && props.visibleOrganizations.map((organization) => {
-              if (organization.id === props.selectedModal) {
-                return <MapModalView key={organization.id} {...organization} dispatch={props.dispatch}/>
+              if (organization._id === props.selectedModal) {
+                return <MapModalView key={organization._id} {...organization} dispatch={props.dispatch}/>
               } else {
                 // removes console warning of arrow function return statement
                 return null

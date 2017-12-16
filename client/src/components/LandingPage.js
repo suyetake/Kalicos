@@ -15,9 +15,13 @@ class LandingPage extends React.Component {
 	}
 	render() {
 		return (
-			<LandingForm 
-				onSubmit={this.handleSubmit}
-			/>		
+			<div>
+				<LandingForm 
+					onSubmit={this.handleSubmit}
+				/>
+				<br/>
+				<p>Find locations within area of zip code or address</p>
+			</div>
 		)
 	}
 }

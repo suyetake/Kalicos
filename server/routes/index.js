@@ -11,4 +11,5 @@ module.exports = (app) => {
   app.post('/api/user', userController.create)
   app.post('/api/organization', organizationController.create)
   app.get('/api/organization', organizationController.searchByLocation)
+  app.get('/api/organizations', organizationController.getAllLocations)
 }
