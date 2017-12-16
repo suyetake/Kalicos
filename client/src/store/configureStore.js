@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { reducer as formReducer } from 'redux-form'
+import { reducer as modal } from 'redux-modal'
 import thunkMiddleware from 'redux-thunk'
 import organizationsReducer from '../reducers/organizations'
 import filterReducer from '../reducers/filters'
@@ -15,6 +16,7 @@ const store = createStore(
 		organizations: organizationsReducer,
 		filters: filterReducer,
 		userControls: userControlsReducer,
+		modal,
 		form: formReducer.plugin({
     		organizationForm: (state, action) => { 
       			switch(action.type) {

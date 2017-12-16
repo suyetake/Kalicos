@@ -1,4 +1,9 @@
-import uuid from 'uuid';
+import uuid from 'uuid'
+import axios from 'axios'
+
+
+const RECEIVE_ALL_ORGANIZATIONS = 'RECEIVE_ALL_ORGANIZATIONS'
+
 
 const addOrganization = ({
 	id = uuid(),
@@ -27,6 +32,25 @@ const editOrganization = (id, updates) => ({
 	updates
 })
 
+const receiveOrganizations = (data) => {
+	return {
+		type: RECEIVE_ALL_ORGANIZATIONS,
+		data: data
+	}
+}
 
-export { addOrganization, editOrganization }
+const getOrganizations = () => {
+	return (dispatch) => {
+		return axios.get('http://localhost:4000/api/organizations')
+		.then(
+			response => response.data,
+			error => console.log('A request error occurred', error)
+		)
+		.then(data => 
+			dispatch(receiveOrganizations(data))
+		)
+	}
+}
+
+export { addOrganization, editOrganization, getOrganizations, RECEIVE_ALL_ORGANIZATIONS }
 

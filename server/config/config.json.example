@@ -1,14 +1,14 @@
 { 
   "test": { 
     "PORT": 3001,
-    "MONGODB_URI": "mongodb://localhost:27017/KaliosTest",
+    "MONGODB_URI": "mongodb://localhost:27017/KalicosTest",
     "JWT_SECRET": "pw123msiv4j6do1odsakk9d",
     "API_KEY_GMAPS": "Register a google maps api key"
   },
   "development": {
     "PORT": 3000,
     "NODE_ENV": "development",
-    "MONGODB_URI": "mongodb://localhost:27017/Kalios",
+    "MONGODB_URI": "mongodb://localhost:27017/Kalicos",
     "JWT_SECRET": "jd5n6pfl2kdfnkl395jasdfn",
     "API_KEY_GMAPS": "Register a google maps api key"
   },

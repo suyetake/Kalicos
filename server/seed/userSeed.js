@@ -16,6 +16,7 @@ const users = [
 ]
 
 const populateUsers = (done) => {
+  console.log('POPULATED USERS')
   Users
     .remove({})
     .then(() => {
@@ -27,8 +28,6 @@ const populateUsers = (done) => {
 
       return Promise.all(addUsers)
     })
-    .then(() => done())
-    .catch(err => done(err))
 }
 
 module.exports = {
