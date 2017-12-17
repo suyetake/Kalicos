@@ -1,45 +1,21 @@
-import uuid from 'uuid'
 import axios from 'axios'
 
 
 const RECEIVE_ALL_ORGANIZATIONS = 'RECEIVE_ALL_ORGANIZATIONS'
+const RECEIVE_ADDED_ORGANIZATION = 'RECEIVE_ADDED_ORGANIZATION'
+const RECEIVE_UDPATED_ORGANIZATION = 'RECEIVE_UDPATED_ORGANIZATION'
 
 
-const addOrganization = ({
-	id = uuid(),
-	lat = 0,
-	lng = 0,
-	name = '',
-	category = '',
-	description = '',
-	address = ''
-}) => ({
-	type: 'ADD_ORGANIZATION',
-	organization: {
-		id,
-		lat,
-		lng,
-		name,
-		category,
-		description,
-		address
-	}
-})
 
-const editOrganization = (id, updates) => ({
-	type: 'EDIT_ORGANIZATION',
-	id,
-	updates
-})
-
-const receiveOrganizations = (data) => {
+// Pull all organizations from DB
+const receiveAllOrganizations = (data) => {
 	return {
 		type: RECEIVE_ALL_ORGANIZATIONS,
-		data: data
+		organizations: data
 	}
 }
 
-const getOrganizations = () => {
+const getAllOrganizations = () => {
 	return (dispatch) => {
 		return axios.get('http://localhost:4000/api/organizations')
 		.then(
@@ -47,10 +23,55 @@ const getOrganizations = () => {
 			error => console.log('A request error occurred', error)
 		)
 		.then(data => 
-			dispatch(receiveOrganizations(data))
+			dispatch(receiveAllOrganizations(data))
 		)
 	}
 }
 
-export { addOrganization, editOrganization, getOrganizations, RECEIVE_ALL_ORGANIZATIONS }
+// Create new organization
+const receiveAddedOrganization = (data) => {
+	return {
+		type: RECEIVE_ADDED_ORGANIZATION,
+		organization: data
+	}
+}
+
+const addOrganization = ({ 
+  name = '',
+  category = '',
+  description = '',
+  address = ''
+}) => {
+	return (dispatch) => {
+		return axios.post('http://localhost:4000/api/organization', {
+			name,
+			category,
+			description,
+			address
+		})
+		.then(
+			response => response.data,
+			error => console.log('A request error occurred', error)
+		)
+		.then(data => 
+			dispatch(receiveAddedOrganization(data[0])),
+		)
+	}
+}
+
+// Update organization
+const receiveUpdatedOrganization = (id, updates) => {
+	return {
+		type: RECEIVE_UDPATED_ORGANIZATION,
+		id,
+		updates
+	}
+}
+
+const updateOrganization = (id, updates) => {
+
+}
+
+
+export { getAllOrganizations, RECEIVE_ALL_ORGANIZATIONS, addOrganization, RECEIVE_ADDED_ORGANIZATION, updateOrganization, RECEIVE_UDPATED_ORGANIZATION, receiveUpdatedOrganization }
 

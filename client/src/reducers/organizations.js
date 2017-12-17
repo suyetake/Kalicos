@@ -1,15 +1,15 @@
-import { RECEIVE_ALL_ORGANIZATIONS } from '../actions/organizations'
+import { RECEIVE_ALL_ORGANIZATIONS, RECEIVE_ADDED_ORGANIZATION, RECEIVE_UDPATED_ORGANIZATION } from '../actions/organizations'
 
 const organizationsReducerDefaultState = [];
 
 const organizationsReducer = (state = organizationsReducerDefaultState, action) => {
 	switch (action.type) {
-		case 'ADD_ORGANIZATION':
+		case RECEIVE_ADDED_ORGANIZATION:
 			return [
 				...state,
 				action.organization
 			]
-		case 'EDIT_ORGANIZATION':
+		case RECEIVE_UDPATED_ORGANIZATION:
 			return state.map((organization) => {
 				if (organization.id === action.id) {
 					return {
@@ -23,7 +23,7 @@ const organizationsReducer = (state = organizationsReducerDefaultState, action) 
 		case RECEIVE_ALL_ORGANIZATIONS:
 			return [
 				...state,
-				...action.data
+				...action.organizations
 			]
 		default:
 			return state;

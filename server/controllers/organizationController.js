@@ -16,34 +16,69 @@ function lookupAddress(address) {
 }
 
 module.exports = {
-  create(req, res) {
+  createOrganization(req, res) {
     var { name, address, description, category } = req.body
     lookupAddress(address)
       .then(response => {
-        var { lat: latitude, lng: longitude } = response
+        // var { latitude: lat, longitude: lng } = response
+        var latitude = response.lat
+        var longitude = response.lng
+        console.log(response)
         const organization = new Organizations({ name, address, description, latitude, longitude })
         if (category) {
           organization.category = category.toLowerCase()
         }
         category = organization.category
-        return organization.save().then(user => res.send({ name, address, category, latitude, longitude, description }))
+        organization.save().then(() => {
+          var find = Organizations.find({name}, '_id name address category description latitude longitude')
+          find.exec(function (err, org) {
+            console.log('found org', org)
+            if (err) {
+              console.log(err)
+              res.send(err)
+            } else {
+              res.send(org)
+            }
+          })
+        })
       })
-      .catch(err => res.status(400).send({ error: err.message }))
+  },
+  updateOrganization(req, res) {
+    console.log('request', req.body)
+    var { name, category, description, address } = req.body
+    lookupAddress(address)
+      .then(response => {
+        var { latitude, longitude } = response
+        console.log(response)
+        var update = Organizations.find(
+          { _id: req.body._id },
+          { name: name, category: category, description: description, address: address, latitude: latitude, longitude: longitude }
+        )
+        update.exec(function (err, org) {
+          console.log(org)
+          if (err) {
+            console.log(err)
+            res.send(err)
+          } else {
+            res.send(org)
+          }
+        })
+      })
   },
   searchByLocation(req, res) {
-    const { address, category } = req.query
+    var { address, category } = req.query
     // find address location
     console.log('query request', req.query)
 
     lookupAddress(address)
       .then(response => {
-        var {lat, lng} = response
+        var { latitude, longitude } = response
         console.log(response)
         // FIXME: solution for searching is hard coded and doesn't reflect actual distance
         // currently leaving hardcoded for testing purposes
-        var find = Organizations.find({}, '-_id name address category description latitude longitude')
-          .where('latitude').gt(lat - 0.03).lt(lat + 0.03)
-          .where('longitude').gt(lng - 0.03).lt(lng + 0.03)
+        var find = Organizations.find({}, '_id name address category description latitude longitude')
+          .where('latitude').gt(latitude - 0.03).lt(latitude + 0.03)
+          .where('longitude').gt(longitude - 0.03).lt(longitude + 0.03)
         if (category) {
           find.where('category').eq(category.toLowerCase())
         }
@@ -70,7 +105,6 @@ module.exports = {
         console.log(err)
         res.send(err)
       } else {
-        console.log(orgs)
         res.send(orgs)
       }
     })
