@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { setSelectedModal } from '../actions/userControls'
-import onClickOutside from 'react-onclickoutside'
 
 
 
@@ -20,6 +19,6 @@ import onClickOutside from 'react-onclickoutside'
     )
 }
 
-export default onClickOutside(MapModalView)
+export default MapModalView
 
 

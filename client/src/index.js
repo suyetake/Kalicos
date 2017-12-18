@@ -3,28 +3,18 @@ import { render } from 'react-dom'
 import App from './components/App'
 import registerServiceWorker from './registerServiceWorker'
 import { BrowserRouter } from 'react-router-dom'
-import { getOrganizations } from './actions/organizations'
 import configureStore from './store/configureStore'
+import { Provider } from 'react-redux'
+
+import { getAllOrganizations } from './actions/organizations'
 import getVisibleOrganizations from './selectors/organizations'
 
-import { Provider } from 'react-redux'
 // import axios from 'axios'
 
-
-// const showOrgs = () => {
-//   axios.get('http://localhost:4000/api/organizations')
-//     .then((response) => {
-//       console.log(response)
-//     })
-// }
-
-// showOrgs()
 
 
 
 const store = configureStore();
-
-
 
 store.subscribe(() => {
 	const state = store.getState()
@@ -33,9 +23,7 @@ store.subscribe(() => {
 	console.log('visible', visibleOrganizations)
 })
 
-store.dispatch(getOrganizations())
-
-
+store.dispatch(getAllOrganizations())
 
 
 

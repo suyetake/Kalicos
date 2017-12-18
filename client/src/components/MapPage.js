@@ -37,7 +37,7 @@ class MapPage extends React.Component {
   render() {
     let props = this.props
     return (
-      <div className='bubbler'>
+      <div>
         <OrganizationListFilters />
         <div style={{ height: "30em", width: "100%" }}>
           <GoogleMapReact
