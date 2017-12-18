@@ -16,7 +16,7 @@ function lookupAddress(address) {
 }
 
 module.exports = {
-  createOrganization(req, res) {
+  create(req, res) {
     var { name, address, description, category } = req.body
     lookupAddress(address)
       .then(response => {
@@ -30,9 +30,8 @@ module.exports = {
         }
         category = organization.category
         organization.save().then(() => {
-          var find = Organizations.find({name}, '_id name address category description latitude longitude')
+          var find = Organizations.find({name})
           find.exec(function (err, org) {
-            console.log('found org', org)
             if (err) {
               console.log(err)
               res.send(err)
@@ -43,24 +42,30 @@ module.exports = {
         })
       })
   },
-  updateOrganization(req, res) {
-    console.log('request', req.body)
-    var { name, category, description, address } = req.body
+  update(req, res) {
+    var { _id, name, category, description, address } = req.body
     lookupAddress(address)
       .then(response => {
-        var { latitude, longitude } = response
-        console.log(response)
-        var update = Organizations.find(
-          { _id: req.body._id },
-          { name: name, category: category, description: description, address: address, latitude: latitude, longitude: longitude }
+        var latitude = response.lat
+        var longitude = response.lng
+        var update = Organizations.update(
+          { _id: _id },
+          {$set: { name, category, description, address, latitude, longitude }}
         )
         update.exec(function (err, org) {
-          console.log(org)
           if (err) {
             console.log(err)
             res.send(err)
           } else {
-            res.send(org)
+            var find = Organizations.find({_id})
+            find.exec(function (err, org) {
+              if (err) {
+                console.log(err)
+                res.send(err)
+              } else {
+                res.send(org)
+              }
+            })
           }
         })
       })
@@ -76,7 +81,7 @@ module.exports = {
         console.log(response)
         // FIXME: solution for searching is hard coded and doesn't reflect actual distance
         // currently leaving hardcoded for testing purposes
-        var find = Organizations.find({}, '_id name address category description latitude longitude')
+        var find = Organizations.find({})
           .where('latitude').gt(latitude - 0.03).lt(latitude + 0.03)
           .where('longitude').gt(longitude - 0.03).lt(longitude + 0.03)
         if (category) {
@@ -92,14 +97,13 @@ module.exports = {
           }
         })
       })
-
       .catch(error => {
         console.log(error)
         res.send({ error: error.message })
       })
   },
   getAllLocations(req, res) {
-    var find = Organizations.find({}, '_id name address category description latitude longitude')
+    var find = Organizations.find({})
     find.exec(function (err, orgs) {
       if (err) {
         console.log(err)

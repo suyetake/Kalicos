@@ -11,7 +11,7 @@ const organizationsReducer = (state = organizationsReducerDefaultState, action) 
 			]
 		case RECEIVE_UDPATED_ORGANIZATION:
 			return state.map((organization) => {
-				if (organization.id === action.id) {
+				if (organization._id === action.updates._id) {
 					return {
 						...organization,
 						...action.updates

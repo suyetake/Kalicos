@@ -7,7 +7,7 @@ const RECEIVE_UDPATED_ORGANIZATION = 'RECEIVE_UDPATED_ORGANIZATION'
 
 
 
-// Pull all organizations from DB
+// Pull all organizations
 const receiveAllOrganizations = (data) => {
 	return {
 		type: RECEIVE_ALL_ORGANIZATIONS,
@@ -60,18 +60,35 @@ const addOrganization = ({
 }
 
 // Update organization
-const receiveUpdatedOrganization = (id, updates) => {
+const receiveUpdatedOrganization = (updates) => {
 	return {
 		type: RECEIVE_UDPATED_ORGANIZATION,
-		id,
 		updates
 	}
 }
 
-const updateOrganization = (id, updates) => {
-
+const updateOrganization = (updates) => {
+	return (dispatch) => {
+		return axios.put('http://localhost:4000/api/update', updates)
+		.then(
+			response => response.data,
+			error => console.log('A request error occurred', error)
+		)
+		.then(data => 
+			dispatch(receiveUpdatedOrganization(data[0]))
+		)
+	}
 }
 
 
-export { getAllOrganizations, RECEIVE_ALL_ORGANIZATIONS, addOrganization, RECEIVE_ADDED_ORGANIZATION, updateOrganization, RECEIVE_UDPATED_ORGANIZATION, receiveUpdatedOrganization }
+
+export { 
+	getAllOrganizations, 
+	RECEIVE_ALL_ORGANIZATIONS, 
+	addOrganization, 
+	RECEIVE_ADDED_ORGANIZATION, 
+	updateOrganization, 
+	RECEIVE_UDPATED_ORGANIZATION, 
+	receiveUpdatedOrganization 
+}
 
