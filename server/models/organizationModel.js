@@ -11,12 +11,30 @@ const OrganizationsSchema = mongoose.Schema({
   category: {
     type: String,
     enum: ['nonprofit', 'educational', 'landmark', 'museum'],
-    default: 'nonprofit'
+    default: 'nonprofit',
+    lowercase: true
   },
   // description of the place
   description: {
     required: true,
     type: String
+  },
+  // structure required for mongoDb geospatial queries
+  latLng: {
+    type: {
+      type: String,
+      required: true,
+      enum: ['Point'],
+      default: 'Point'
+    },
+    coordinates: [{
+      type: Number,
+      required: true
+    },
+    {
+      type: Number,
+      required: true
+    }]
   },
   latitude: {
     required: true,

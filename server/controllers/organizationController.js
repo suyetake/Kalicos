@@ -23,12 +23,12 @@ module.exports = {
         // var { latitude: lat, longitude: lng } = response
         var latitude = response.lat
         var longitude = response.lng
-        console.log(response)
-        const organization = new Organizations({ name, address, description, latitude, longitude })
-        if (category) {
-          organization.category = category.toLowerCase()
+        var latLng = {
+          type: 'Point',
+          coordinates: [ response.lng, response.lat ]
         }
-        category = organization.category
+        console.log(response)
+        const organization = new Organizations({ name, address, description, latLng, latitude, longitude, category })
         organization.save().then(() => {
           var find = Organizations.find({name})
           find.exec(function (err, org) {
@@ -48,9 +48,13 @@ module.exports = {
       .then(response => {
         var latitude = response.lat
         var longitude = response.lng
+        var latLng = {
+          type: 'Point',
+          coordinates: [ response.lng, response.lat ]
+        }
         var update = Organizations.update(
           { _id: _id },
-          {$set: { name, category, description, address, latitude, longitude }}
+          {$set: { name, category, description, address, latLng, latitude, longitude }}
         )
         update.exec(function (err, org) {
           if (err) {

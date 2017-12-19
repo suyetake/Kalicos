@@ -24,7 +24,6 @@ const MarkerPoints = ({ text }) =>
 class MapPage extends React.Component {
 
   
-
   componentWillUnmount() {
     this.props.dispatch(setSelectedModal(''))
   }
@@ -50,8 +49,8 @@ class MapPage extends React.Component {
               return (
               <MarkerPoints 
                 key={organization._id}
-                lat={organization.latitude}
-                lng={organization.longitude}
+                lng={organization.latLng.coordinates[0]}
+                lat={organization.latLng.coordinates[1]}
                 text={organization.name}
               />
               )
