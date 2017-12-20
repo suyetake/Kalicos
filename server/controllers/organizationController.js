@@ -20,15 +20,12 @@ module.exports = {
     var { name, address, description, category } = req.body
     lookupAddress(address)
       .then(response => {
-        // var { latitude: lat, longitude: lng } = response
-        var latitude = response.lat
-        var longitude = response.lng
         var latLng = {
           type: 'Point',
           coordinates: [ response.lng, response.lat ]
         }
         console.log(response)
-        const organization = new Organizations({ name, address, description, latLng, latitude, longitude, category })
+        const organization = new Organizations({ name, address, description, latLng, category })
         organization.save().then(() => {
           var find = Organizations.find({name})
           find.exec(function (err, org) {
@@ -46,15 +43,13 @@ module.exports = {
     var { _id, name, category, description, address } = req.body
     lookupAddress(address)
       .then(response => {
-        var latitude = response.lat
-        var longitude = response.lng
         var latLng = {
           type: 'Point',
           coordinates: [ response.lng, response.lat ]
         }
         var update = Organizations.update(
           { _id: _id },
-          {$set: { name, category, description, address, latLng, latitude, longitude }}
+          {$set: { name, category, description, address, latLng }}
         )
         update.exec(function (err, org) {
           if (err) {
@@ -75,28 +70,24 @@ module.exports = {
       })
   },
   searchByLocation(req, res) {
-    var { address, category } = req.query
+    var { address, distance } = req.query
     // find address location
     console.log('query request', req.query)
 
     lookupAddress(address)
       .then(response => {
-        var { latitude, longitude } = response
-        console.log(response)
-        // FIXME: solution for searching is hard coded and doesn't reflect actual distance
-        // currently leaving hardcoded for testing purposes
-        var find = Organizations.find({})
-          .where('latitude').gt(latitude - 0.03).lt(latitude + 0.03)
-          .where('longitude').gt(longitude - 0.03).lt(longitude + 0.03)
-        if (category) {
-          find.where('category').eq(category.toLowerCase())
+        var latLng = {
+          type: 'Point',
+          coordinates: [ response.lng, response.lat ]
         }
+        console.log(latLng)
+        var find = Organizations.find({ latLng: { $geoWithin: { $centerSphere: [ [ latLng.coordinates[0], latLng.coordinates[1] ], distance / 3963.2 ] } } })
         find.exec(function (err, orgs) {
           if (err) {
             console.log(err)
             res.send(err)
           } else {
-            console.log(orgs)
+            console.log('orgs sent', orgs)
             res.send(orgs)
           }
         })

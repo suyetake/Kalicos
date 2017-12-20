@@ -36,14 +36,6 @@ const OrganizationsSchema = mongoose.Schema({
       required: true
     }]
   },
-  latitude: {
-    required: true,
-    type: Number
-  },
-  longitude: {
-    required: true,
-    type: Number
-  },
   // address line
   address: {
     required: true,
