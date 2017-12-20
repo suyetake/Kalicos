@@ -13,7 +13,6 @@ import getVisibleOrganizations from './selectors/organizations'
 
 
 
-
 const store = configureStore();
 
 store.subscribe(() => {
