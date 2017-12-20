@@ -4,6 +4,7 @@ import axios from 'axios'
 const RECEIVE_ALL_ORGANIZATIONS = 'RECEIVE_ALL_ORGANIZATIONS'
 const RECEIVE_ADDED_ORGANIZATION = 'RECEIVE_ADDED_ORGANIZATION'
 const RECEIVE_UDPATED_ORGANIZATION = 'RECEIVE_UDPATED_ORGANIZATION'
+const RECEIVE_ORGANIZATIONS_BY_LOCATION = 'RECEIVE_ORGANIZATIONS_BY_LOCATION'
 
 
 
@@ -24,6 +25,32 @@ const getAllOrganizations = () => {
 		)
 		.then(data => 
 			dispatch(receiveAllOrganizations(data))
+		)
+	}
+}
+
+// Pull organizations by location search
+const receiveOrganizationsByLocation = (data) => {
+	return {
+		type: RECEIVE_ORGANIZATIONS_BY_LOCATION,
+		organizations: data
+	}
+}
+
+const getOrganizationsByLocation = (address, distance) => {
+	console.log('in action', address, distance)
+	return (dispatch) => {
+		return axios.get('http://localhost:4000/api/organization', { 
+			params: {
+			  address,
+			  distance
+			}
+		})
+		.then(response => response.data,
+			error => console.log('A request error occurred', error)
+		)
+		.then(data => 
+		  dispatch(receiveOrganizationsByLocation(data))
 		)
 	}
 }
@@ -85,6 +112,8 @@ const updateOrganization = (updates) => {
 export { 
 	getAllOrganizations, 
 	RECEIVE_ALL_ORGANIZATIONS, 
+	getOrganizationsByLocation,
+	RECEIVE_ORGANIZATIONS_BY_LOCATION,
 	addOrganization, 
 	RECEIVE_ADDED_ORGANIZATION, 
 	updateOrganization, 

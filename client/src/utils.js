@@ -1,5 +1,7 @@
 import { mapsApiKey } from './config'
 
+
+// geocoding moved to server, can remove this function
 export const geocodeAddress = (address) => {
   	let url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + 
 	  	encodeURI(address) + 
