@@ -4,6 +4,7 @@ import MapPage from './MapPage'
 import AddOrganizationPage from './AddOrganizationPage'
 import EditOrganizationPage from './EditOrganizationPage'
 import LandingPage from './LandingPage'
+import LoginPage from './LoginPage'
 
 const Header = () => (
   <div>
@@ -12,6 +13,7 @@ const Header = () => (
       <li><Link to="/maps">Maps</Link></li>
       <li><Link to="/add">Add Org</Link></li>
       <li><Link to="/about">About</Link></li>
+      <li><Link to="/login">Login</Link></li>
     </ul>
   </div>
 )
@@ -32,6 +34,7 @@ class App extends Component {
         <Route path="/add" component={ AddOrganizationPage } />
         <Route path="/edit/:id" component={ EditOrganizationPage } />
         <Route path="/maps" component={ MapPage } />
+        <Route path="/login" component={ LoginPage } />
       </div>
     )
   }

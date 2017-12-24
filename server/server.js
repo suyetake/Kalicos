@@ -3,6 +3,7 @@ const cors       = require('cors')
 const express    = require('express')
 const helmet     = require('helmet')
 const logger     = require('morgan')
+const passport   = require('passport')
 
 const app = express()
 
@@ -28,6 +29,7 @@ if(isDevEnv) {
 app.use(helmet())
 app.use(cors())
 app.use(bodyParser.json())
+app.use(passport.initialize())
 
 if(isDevEnv) {
   app.use(logger('dev'))

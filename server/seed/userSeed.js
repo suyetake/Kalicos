@@ -6,12 +6,14 @@ const users = [
   {
     _id:   new ObjectID(),
     email: 'john@email.com',
-    name:  'John Doe'
+    username:  'John Doe',
+    password: 'john'
   },
   {
     _id:   new ObjectID(),
-    email: 'jane@emial.com',
-    name:  'Jane Doe'
+    email: 'test@email.com',
+    username:  'test',
+    password: '123'
   }
 ]
 
