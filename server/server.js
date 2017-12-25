@@ -4,6 +4,7 @@ const express    = require('express')
 const helmet     = require('helmet')
 const logger     = require('morgan')
 const passport   = require('passport')
+const session    = require('express-session')
 
 const app = express()
 
@@ -25,11 +26,19 @@ if(isDevEnv) {
   })
 }
 
+require('./config/passport')(passport)
+
 // load middleware
 app.use(helmet())
 app.use(cors())
 app.use(bodyParser.json())
+app.use(session({
+  secret: 'cats',
+  resave: false,
+  saveUninitialized: true
+}))
 app.use(passport.initialize())
+app.use(passport.session())
 
 if(isDevEnv) {
   app.use(logger('dev'))

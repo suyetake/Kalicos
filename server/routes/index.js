@@ -1,6 +1,7 @@
-const helloController = require('../controllers/helloController')
-const userController  = require('../controllers/userController')
+const helloController         = require('../controllers/helloController')
+const userController          = require('../controllers/userController')
 const organizationController  = require('../controllers/organizationController')
+const passport                = require('passport')
 
 module.exports = (app) => {
   app.get('/hello', helloController.hello)
@@ -8,7 +9,7 @@ module.exports = (app) => {
   // ==================================================
   // user routes
   // ==================================================
-  app.post('/login', userController.login)
+  app.post('/login', passport.authenticate('login'))
 
   app.post('/api/user', userController.create)
 
