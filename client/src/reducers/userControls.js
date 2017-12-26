@@ -1,7 +1,8 @@
 import { 
 	SET_MAP_CENTER,
 	SET_SELECTED_MODAL,
-	RECEIVE_USER_LOGIN
+	RECEIVE_USER_LOGIN,
+	LOGOUT_USER
 } from '../actions/userControls'
 
 const userControlsReducerDefaultState = {
@@ -10,7 +11,11 @@ const userControlsReducerDefaultState = {
 		lng: -105.2705456
 	},
 	modal: '',
-	user: null
+	user: {
+		accessLevel: '',
+		email: '',
+		username: ''
+	}
 }
 
 const userControlsReducer = (state = userControlsReducerDefaultState, action) => {
@@ -29,6 +34,15 @@ const userControlsReducer = (state = userControlsReducerDefaultState, action) =>
 			return {
 				...state,
 				user: action.user
+			}
+		case LOGOUT_USER:
+			return {
+				...state,
+				user: {
+					accessLevel: '',
+					email: '',
+					username: ''
+				}
 			}
 		default:
 			return state

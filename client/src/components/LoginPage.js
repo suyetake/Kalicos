@@ -1,17 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import LoginForm from './LoginForm'
+import { userLogin } from '../actions/userControls'
 
 
 class LoginPage extends React.Component {
-
-
 	handleSubmit = (login) => {
-		console.log(login)
-		// this.props.dispatch(getOrganizationsByLocation(search.address, search.distance))
-		// geocodeAddress(search.address)
-		// 	.then(latLng => this.props.dispatch(setMapCenter(latLng)))
-		// this.props.history.push('/maps')
+		this.props.dispatch(userLogin(login.username, login.password))
+		this.props.history.push('/')
 	}
 	render() {
 		return (

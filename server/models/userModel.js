@@ -20,6 +20,12 @@ const UsersSchema = mongoose.Schema({
     trim: true,
     required: true,
     unique: true
+  },
+  accessLevel: {
+    type: String,
+    minLength: 1,
+    trim: true,
+    required: true
   }
 })
 

@@ -7,8 +7,6 @@ import { getOrganizationsByLocation } from '../actions/organizations'
 
 
 class LandingPage extends React.Component {
-
-
 	handleSubmit = (search) => {
 		this.props.dispatch(getOrganizationsByLocation(search.address, search.distance))
 		geocodeAddress(search.address)

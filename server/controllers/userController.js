@@ -12,14 +12,12 @@ module.exports = {
       .catch(err => res.status(400).send({ error: err.message }))
   },
   login(req, res) {
-    console.log(req.body)
-    // const auth = () => {
     passport.authenticate('login', function(err, user) {
       if (err) {
         return (err)
       } else {
-        console.log('SUCCESS! inside userController')
-        return res.send(user)
+        var returnedUser = { accessLevel: user.accessLevel, email: user.email, username: user.username }
+        return res.send(returnedUser)
       }
     })(req, res)
   }
