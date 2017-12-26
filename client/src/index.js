@@ -11,6 +11,15 @@ import getVisibleOrganizations from './selectors/organizations'
 
 // import axios from 'axios'
 
+// const loginP = () => {
+// axios.post('http://localhost:4000/login', {
+//         username: 'test',
+//         password: '123'
+//     })
+//     .then(response => console.log('login res', response))
+// }
+
+// loginP()
 
 
 const store = configureStore();

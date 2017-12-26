@@ -1,17 +1,26 @@
 const { ObjectID } = require('mongodb')
 
+const bCrypt   = require('bcrypt-nodejs')
 const Users = require('../models/userModel')
+
+const hashPassword = function(password) {
+  return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null)
+}
 
 const users = [
   {
     _id:   new ObjectID(),
     email: 'john@email.com',
-    name:  'John Doe'
+    username:  'John Doe',
+    password: hashPassword('john'),
+    accessLevel: 'standard'
   },
   {
     _id:   new ObjectID(),
-    email: 'jane@emial.com',
-    name:  'Jane Doe'
+    email: 'test@email.com',
+    username:  'test',
+    password: hashPassword('123'),
+    accessLevel: 'admin'
   }
 ]
 

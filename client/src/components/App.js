@@ -1,20 +1,13 @@
 import React, { Component } from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
+import Header from './Header'
 import MapPage from './MapPage'
 import AddOrganizationPage from './AddOrganizationPage'
 import EditOrganizationPage from './EditOrganizationPage'
 import LandingPage from './LandingPage'
-
-const Header = () => (
-  <div>
-    <ul>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/maps">Maps</Link></li>
-      <li><Link to="/add">Add Org</Link></li>
-      <li><Link to="/about">About</Link></li>
-    </ul>
-  </div>
-)
+import LoginPage from './LoginPage'
+import AdminPage from './AdminPage'
+import { userLogout } from '../actions/userControls'
 
 
 const About = () => (
@@ -32,9 +25,12 @@ class App extends Component {
         <Route path="/add" component={ AddOrganizationPage } />
         <Route path="/edit/:id" component={ EditOrganizationPage } />
         <Route path="/maps" component={ MapPage } />
+        <Route path="/login" component={ LoginPage } />
+        <Route path="/admin" component={ AdminPage } />
       </div>
     )
   }
 }
 
-export default App;
+
+export default App

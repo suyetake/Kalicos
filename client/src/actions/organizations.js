@@ -96,7 +96,7 @@ const receiveUpdatedOrganization = (updates) => {
 
 const updateOrganization = (updates) => {
 	return (dispatch) => {
-		return axios.put('http://localhost:4000/api/update', updates)
+		return axios.put('http://localhost:4000/api/updateorganization', updates)
 		.then(
 			response => response.data,
 			error => console.log('A request error occurred', error)
