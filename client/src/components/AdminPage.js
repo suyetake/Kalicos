@@ -1,13 +1,49 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { userLogout } from '../actions/userControls'
+import { createUser } from '../actions/userControls'
+import { reset } from 'redux-form'
 import selectOrganizations from '../selectors/organizations'
+import SignUpForm from './SignUpForm'
 
-const AdminPage = (props) => (
-	<div>
-		<p>Welcome {props.user.username}!</p>
-	</div>
-)
+
+
+
+class AdminPage extends React.Component {
+
+	componentWillMount () {
+		if (this.props.user.accessLevel !== 'admin') {
+			this.props.history.push('/')
+		} 
+	}
+
+	// temporary work around until Logout button can do history.push (in Header.js)
+	componentDidUpdate () {
+		if (this.props.user.accessLevel !== 'admin') {
+			this.props.history.push('/')
+		} 
+	}
+
+	handleSubmit = (user) => {
+		// console.log(user)
+		this.props.dispatch(createUser(user))
+		this.props.dispatch(reset('signUpForm'))
+	}
+
+	render() {
+		return (
+			<div>
+				<div>
+					<p>Welcome {this.props.user.username}!</p>
+				</div>
+				<div>
+					<SignUpForm 
+						onSubmit={this.handleSubmit}
+					/>
+				</div>
+			</div>
+		)
+	}
+}
 
 const mapStateToProps = (state, props) => {
   return {

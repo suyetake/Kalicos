@@ -24,7 +24,7 @@ const receiveUserLogin = (user) => {
 	}
 }
 
-const userLogin = (username, password) => {
+const loginUser = (username, password) => {
 	return (dispatch) => {
 		return axios.post('http://localhost:4000/login', {
 			username,
@@ -40,9 +40,22 @@ const userLogin = (username, password) => {
 	}
 }
 
-const userLogout = () => {
+const logoutUser = () => {
 	return {
 		type: LOGOUT_USER
+	}
+}
+
+const createUser= ({username, email, password, accessLevel}) => {
+	return (dispatch) => {
+		return axios.post('http://localhost:4000/api/createUser', {
+			username,
+			email,
+			password,
+			accessLevel
+	})
+	.then(
+		response => console.log(response))
 	}
 }
 
@@ -53,7 +66,8 @@ export {
 	SET_SELECTED_MODAL,
 	setSelectedModal,
 	RECEIVE_USER_LOGIN,
-	userLogin,
-	userLogout,
-	LOGOUT_USER
+	loginUser,
+	logoutUser,
+	LOGOUT_USER,
+	createUser
 }

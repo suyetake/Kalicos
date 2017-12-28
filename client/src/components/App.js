@@ -7,7 +7,6 @@ import EditOrganizationPage from './EditOrganizationPage'
 import LandingPage from './LandingPage'
 import LoginPage from './LoginPage'
 import AdminPage from './AdminPage'
-import { userLogout } from '../actions/userControls'
 
 
 const About = () => (

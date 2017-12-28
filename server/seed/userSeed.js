@@ -11,7 +11,7 @@ const users = [
   {
     _id:   new ObjectID(),
     email: 'john@email.com',
-    username:  'John Doe',
+    username:  'john',
     password: hashPassword('john'),
     accessLevel: 'standard'
   },

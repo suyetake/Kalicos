@@ -9,6 +9,7 @@ module.exports = (app) => {
   // user routes
   // ==================================================
   app.post('/login', userController.login)
+  app.post('/api/createuser', userController.create)
   // app.post('/signup', userController.signup)
 
   app.post('/api/user', userController.create)
