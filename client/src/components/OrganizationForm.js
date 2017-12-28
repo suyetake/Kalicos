@@ -31,10 +31,14 @@ let OrganizationForm = (props) => {
           <label>Category</label>
           <Field 
             name="category" 
-            component="input" 
-            type="text"
-            placeholder="Museum/NonProfit/etc"
-          />
+            component="select"
+          > 
+            <option>Select Category</option>
+            <option value="nonprofit">Nonprofit</option>
+            <option value="educational">Educational</option>
+            <option value="landmark">Landmark</option>
+            <option value="museum">Museum</option>
+          </Field>
           <button type="submit">Submit Organization</button>
       </form>
       <br/>

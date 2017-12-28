@@ -6,8 +6,9 @@ const getVisibleOrganizations = (organizations, { name, description, address, ca
 		const addressMatch = organization.address.toLowerCase().includes(address)
 		const categoryMatch = organization.category.toLowerCase().includes(category)
 
-		return nameMatch && descriptionMatch && addressMatch && categoryMatch;
+		return nameMatch && descriptionMatch && addressMatch && categoryMatch
 	})
-};
+}
 
-export default getVisibleOrganizations;
+
+export default getVisibleOrganizations

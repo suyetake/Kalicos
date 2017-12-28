@@ -31,7 +31,7 @@ let SignUpForm = (props) => {
 					name="accessLevel"
 					component="select"
 				>
-					<option></option>
+					<option>Select Access Level</option>
 					<option value="standard">Standard</option>
 		            <option value="admin">Admin</option>
          		 </Field>

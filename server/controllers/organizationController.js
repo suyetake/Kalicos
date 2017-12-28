@@ -24,6 +24,7 @@ module.exports = {
           type: 'Point',
           coordinates: [ response.lng, response.lat ]
         }
+        // const newlyAdded = true
         console.log(response)
         const organization = new Organizations({ name, address, description, latLng, category })
         organization.save().then(() => {
@@ -104,6 +105,18 @@ module.exports = {
         console.log(err)
         res.send(err)
       } else {
+        res.send(orgs)
+      }
+    })
+  },
+  getNewlyAdded(req, res) {
+    var find = Organizations.find({newlyAdded: true})
+    find.exec(function (err, orgs) {
+      if (err) {
+        console.log(err)
+        res.send(err)
+      } else {
+        console.log(orgs)
         res.send(orgs)
       }
     })

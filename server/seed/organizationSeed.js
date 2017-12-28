@@ -15,7 +15,8 @@ const organizations = [
     },
     latitude: 40.0092355,
     longitude: -105.2733468,
-    address: '6672 Gunpark Dr, Boulder, CO 80301'
+    address: '6672 Gunpark Dr, Boulder, CO 80301',
+    newlyAdded: false
   },
   {
     _id:   new ObjectID(),
@@ -28,7 +29,8 @@ const organizations = [
     },
     latitude: 40.013952,
     longitude: -105.281769,
-    address: '1001 Arapahoe Ave, Boulder, CO, 80302'
+    address: '1001 Arapahoe Ave, Boulder, CO, 80302',
+    newlyAdded: false
   },
   {
     _id:   new ObjectID(),
@@ -41,7 +43,8 @@ const organizations = [
     },
     latitude: 39.9984502,
     longitude: -105.0890096,
-    address: '6672 Gunpark Drive, Boulder, CO, 80302'
+    address: '6672 Gunpark Drive, Boulder, CO, 80302',
+    newlyAdded: false
   }
 ]
 

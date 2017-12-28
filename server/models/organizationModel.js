@@ -41,6 +41,10 @@ const OrganizationsSchema = mongoose.Schema({
   address: {
     required: true,
     type: String
+  },
+  newlyAdded: {
+    type: Boolean,
+    default: true
   }
 })
 
