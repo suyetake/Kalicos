@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const bCrypt   = require('bcrypt-nodejs')
 
 const UsersSchema = mongoose.Schema({
   username: {
@@ -23,15 +22,12 @@ const UsersSchema = mongoose.Schema({
   },
   accessLevel: {
     type: String,
-    minLength: 1,
-    trim: true,
+    enum: ['standard', 'admin'],
+    default: 'standard',
+    lowercase: true,
     required: true
   }
 })
-
-UsersSchema.methods.generateHash = function(password) {
-  return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null)
-}
 
 const Users = mongoose.model('Users', UsersSchema)
 

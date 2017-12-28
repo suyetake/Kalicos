@@ -12,7 +12,8 @@ const OrganizationsSchema = mongoose.Schema({
     type: String,
     enum: ['nonprofit', 'educational', 'landmark', 'museum'],
     default: 'nonprofit',
-    lowercase: true
+    lowercase: true,
+    required: true
   },
   // description of the place
   description: {

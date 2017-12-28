@@ -16,7 +16,7 @@ let LoginForm = (props) => {
 				<Field 
 					name="password"
 					component="input"
-					type="text"
+					type="password"
 					placeholder="Enter your password"
 				/>
          		 <button type="submit">Login</button>

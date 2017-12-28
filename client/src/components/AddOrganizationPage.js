@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import OrganizationForm from './OrganizationForm'
 import { addOrganization } from '../actions/organizations'
-import {reset} from 'redux-form'
+import { reset } from 'redux-form'
 
 
 class AddOrganizationPage extends React.Component {
