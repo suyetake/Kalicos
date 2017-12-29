@@ -4,7 +4,8 @@ const UsersSchema = mongoose.Schema({
   username: {
     type: String,
     minLength: 1,
-    trim: true
+    trim: true,
+    unique: true
   },
   email: {
     type: String,
@@ -17,8 +18,7 @@ const UsersSchema = mongoose.Schema({
     type: String,
     minLength: 1,
     trim: true,
-    required: true,
-    unique: true
+    required: true
   },
   accessLevel: {
     type: String,

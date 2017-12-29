@@ -20,9 +20,25 @@ module.exports = {
       if (err) {
         return (err)
       } else {
-        const returnedUser = { accessLevel: user.accessLevel, email: user.email, username: user.username }
+        let returnedUser = { id: user._id, accessLevel: user.accessLevel, email: user.email, username: user.username }
         return res.send(returnedUser)
       }
     })(req, res)
+  },
+  update(req, res) {
+
+  },
+  findUserForUpdate(req, res) {
+    var { email } = req.query
+    var find = Users.findOne({ email })
+    find.exec(function (err, user) {
+      if (err) {
+        console.log(err)
+        res.send(err)
+      } else {
+        let returnedUser = { id: user._id, accessLevel: user.accessLevel, email: user.email, username: user.username }
+        res.send(returnedUser)
+      }
+    })
   }
 }

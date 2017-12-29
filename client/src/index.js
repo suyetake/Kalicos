@@ -9,16 +9,15 @@ import { Provider } from 'react-redux'
 import { getAllOrganizations } from './actions/organizations'
 import getVisibleOrganizations from './selectors/organizations'
 
-import axios from 'axios'
+// import axios from 'axios'
 
 // const createU = () => {
-// axios.post('http://localhost:4000/api/createuser', {
-//         email: 'email@email.com',
-//         username: 'devon',
-//         password: 'devon',
-//         accessLevel: 'admin'
-//     })
-//     .then(response => console.log('login res', response))
+//   axios.get('http://localhost:4000/api/user', {
+//     params: {
+//       email: 'test@email.com'
+//       }
+//   })
+//   .then(response => console.log('login res', response))
 // }
 
 // createU()

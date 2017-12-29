@@ -2,7 +2,8 @@ import {
 	SET_MAP_CENTER,
 	SET_SELECTED_MODAL,
 	RECEIVE_USER_LOGIN,
-	LOGOUT_USER
+	LOGOUT_USER,
+	RECEIVEUSERFORUPDATE
 } from '../actions/userControls'
 
 const userControlsReducerDefaultState = {
@@ -15,7 +16,8 @@ const userControlsReducerDefaultState = {
 		accessLevel: '',
 		email: '',
 		username: ''
-	}
+	},
+	updatingUser: {}
 }
 
 const userControlsReducer = (state = userControlsReducerDefaultState, action) => {
@@ -43,6 +45,11 @@ const userControlsReducer = (state = userControlsReducerDefaultState, action) =>
 					email: '',
 					username: ''
 				}
+			}
+		case RECEIVEUSERFORUPDATE:
+			return {
+				...state,
+				updatingUser: action.user
 			}
 		default:
 			return state

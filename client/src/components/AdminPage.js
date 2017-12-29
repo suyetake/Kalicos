@@ -1,9 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { createUser } from '../actions/userControls'
+import { createUser, findUserForUpdate } from '../actions/userControls'
 import { reset } from 'redux-form'
 import selectOrganizations from '../selectors/organizations'
 import SignUpForm from './SignUpForm'
+import FindUserForm from './FindUserForm'
+import UserUpdateForm from './UserUpdateForm'
 
 
 
@@ -23,11 +25,22 @@ class AdminPage extends React.Component {
 		} 
 	}
 
-	handleSubmit = (user) => {
+	handleSignUpSubmit = (user) => {
 		// console.log(user)
 		this.props.dispatch(createUser(user))
 		this.props.dispatch(reset('signUpForm'))
 	}
+
+	handleFindUserSubmit = (user) => {
+		this.props.dispatch(findUserForUpdate(user.email))
+		this.props.dispatch(reset('findUserForm'))
+	}
+
+	handleUserUpdateSubmit = (user) => {
+		console.log(user)
+	}
+
+	
 
 	render() {
 		return (
@@ -36,8 +49,24 @@ class AdminPage extends React.Component {
 					<p>Welcome {this.props.user.username}!</p>
 				</div>
 				<div>
+					<p>Create new user account</p>
 					<SignUpForm 
-						onSubmit={this.handleSubmit}
+						onSubmit={this.handleSignUpSubmit}
+					/>
+				</div>
+				<br/>
+				<p>Find User</p>
+				<div>
+					<FindUserForm 
+						onSubmit={this.handleFindUserSubmit}
+					/>
+				</div>
+				<br/>
+				<p>Update Found User</p>
+				<div>
+					<UserUpdateForm
+						updatingUser={this.props.updatingUser}
+						onSubmit={this.handleUserUpdateSubmit}
 					/>
 				</div>
 			</div>
@@ -48,7 +77,8 @@ class AdminPage extends React.Component {
 const mapStateToProps = (state, props) => {
   return {
   	visibleOrganizations: selectOrganizations(state.organizations, state.filters),
-    user: state.userControls.user
+    user: state.userControls.user,
+    updatingUser: state.userControls.updatingUser
   }
 }
 
