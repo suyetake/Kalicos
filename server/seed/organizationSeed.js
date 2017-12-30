@@ -13,8 +13,6 @@ const organizations = [
       type: 'Point',
       coordinates: [ -105.2733468, 40.0092355 ]
     },
-    latitude: 40.0092355,
-    longitude: -105.2733468,
     address: '6672 Gunpark Dr, Boulder, CO 80301',
     newlyAdded: false
   },
@@ -27,8 +25,6 @@ const organizations = [
       type: 'Point',
       coordinates: [ -105.281769, 40.013952 ]
     },
-    latitude: 40.013952,
-    longitude: -105.281769,
     address: '1001 Arapahoe Ave, Boulder, CO, 80302',
     newlyAdded: false
   },
@@ -41,10 +37,20 @@ const organizations = [
       type: 'Point',
       coordinates: [ -105.0890096, 39.9984502 ]
     },
-    latitude: 39.9984502,
-    longitude: -105.0890096,
     address: '6672 Gunpark Drive, Boulder, CO, 80302',
     newlyAdded: false
+  },
+  {
+    _id:   new ObjectID(),
+    name: 'Haoway',
+    org_type: 'NONPROFIT',
+    description: 'It\'s Haoway!.',
+    latLng: {
+      type: 'Point',
+      coordinates: [ -105.2526285, 40.0163854 ]
+    },
+    address: '1678 30th St, Boulder, CO 80301',
+    newlyAdded: true
   }
 ]
 

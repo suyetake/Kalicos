@@ -16,7 +16,7 @@ module.exports = (app) => {
 
   app.get('/api/organization', organizationController.searchByLocation)
   app.get('/api/organizations', organizationController.getAllLocations)
-  app.get('/api/neworganizations', organizationController.getNewlyAdded)
+  app.get('/api/neworganizations', organizationController.getNewOrganizations)
   app.post('/api/organization', organizationController.create)
   app.put('/api/updateorganization', organizationController.update)
 }

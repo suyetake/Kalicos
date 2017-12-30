@@ -11,7 +11,6 @@ const organizationsReducer = (state = organizationsReducerDefaultState, action) 
 	switch (action.type) {
 		case RECEIVE_ALL_ORGANIZATIONS:
 			return [
-				...state,
 				...action.organizations
 			]
 		case RECEIVE_ORGANIZATIONS_BY_LOCATION:

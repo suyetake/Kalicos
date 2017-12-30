@@ -7,7 +7,6 @@ const RECEIVE_UDPATED_ORGANIZATION = 'RECEIVE_UDPATED_ORGANIZATION'
 const RECEIVE_ORGANIZATIONS_BY_LOCATION = 'RECEIVE_ORGANIZATIONS_BY_LOCATION'
 
 
-
 // Pull all organizations
 const receiveAllOrganizations = (data) => {
 	return {
@@ -54,6 +53,7 @@ const getOrganizationsByLocation = (address, distance) => {
 		)
 	}
 }
+
 
 // Create new organization
 const receiveAddedOrganization = (data) => {
@@ -118,6 +118,6 @@ export {
 	RECEIVE_ADDED_ORGANIZATION, 
 	updateOrganization, 
 	RECEIVE_UDPATED_ORGANIZATION, 
-	receiveUpdatedOrganization 
+	receiveUpdatedOrganization,
 }
 

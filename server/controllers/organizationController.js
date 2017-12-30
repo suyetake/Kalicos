@@ -109,7 +109,7 @@ module.exports = {
       }
     })
   },
-  getNewlyAdded(req, res) {
+  getNewOrganizations(req, res) {
     var find = Organizations.find({newlyAdded: true})
     find.exec(function (err, orgs) {
       if (err) {

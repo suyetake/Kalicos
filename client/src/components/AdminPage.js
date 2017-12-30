@@ -1,11 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { createUser, findUserForUpdate } from '../actions/userControls'
 import { reset } from 'redux-form'
 import selectOrganizations from '../selectors/organizations'
+import { createUser, findUserForUpdate } from '../actions/userControls'
+import { getNewOrganizations } from '../actions/newOrganizations'
 import SignUpForm from './SignUpForm'
 import FindUserForm from './FindUserForm'
 import UserUpdateForm from './UserUpdateForm'
+import NewOrganizationsListItem from './NewOrganizationsListItem'
 
 
 
@@ -40,6 +42,10 @@ class AdminPage extends React.Component {
 		console.log(user)
 	}
 
+	pullNewOrgs = () => {
+		this.props.dispatch(getNewOrganizations())
+	}
+
 	
 
 	render() {
@@ -68,6 +74,10 @@ class AdminPage extends React.Component {
 						updatingUser={this.props.updatingUser}
 						onSubmit={this.handleUserUpdateSubmit}
 					/>
+				</div>
+				<button onClick={this.pullNewOrgs}>show new orgs</button>
+				<div>
+					<NewOrganizationsListItem />
 				</div>
 			</div>
 		)
