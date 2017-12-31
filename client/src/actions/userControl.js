@@ -78,8 +78,8 @@ const findUserForUpdate = (email) => {
 			response => response.data,
 			error => console.log('A request error occurred', error)
 		)
-		.then(data => 
-			dispatch(receiveUserForUpdate(data))
+		.then(
+			data => dispatch(receiveUserForUpdate(data))
 		)
 	}
 }
@@ -90,6 +90,11 @@ const receiveUserForUpdate = (user) => {
 		user
 	}
 }
+
+// update user on admin page 
+// const updateUser = () => {
+	
+// }
 
 
 export { 

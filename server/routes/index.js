@@ -15,11 +15,11 @@ module.exports = (app) => {
   app.put('/api/updateuser', userController.update)
 
   app.get('/api/organization', organizationController.searchByLocation)
-  app.get('/api/organizations', organizationController.getAllLocations)
-  app.get('/api/neworganizations', organizationController.getNewOrganizations)
+  app.get('/api/organizations', organizationController.findAllAcceptedLocations)
+  app.get('/api/neworganizations', organizationController.findNewOrganizations)
   app.post('/api/organization', organizationController.create)
   app.put('/api/updateorganization', organizationController.update)
   app.delete('/api/removeorganization', organizationController.remove)
 
-  app.put('/api/updateneworganization', organizationController.updateNew)
+  app.put('/api/acceptneworganization', organizationController.acceptNew)
 }

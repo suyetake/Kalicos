@@ -7,7 +7,7 @@ const RECEIVE_UDPATED_ORGANIZATION = 'RECEIVE_UDPATED_ORGANIZATION'
 const RECEIVE_ORGANIZATIONS_BY_LOCATION = 'RECEIVE_ORGANIZATIONS_BY_LOCATION'
 
 
-// Pull all organizations
+// Pull all accepted organizations
 const receiveAllOrganizations = (data) => {
 	return {
 		type: RECEIVE_ALL_ORGANIZATIONS,
@@ -22,13 +22,13 @@ const getAllOrganizations = () => {
 			response => response.data,
 			error => console.log('A request error occurred', error)
 		)
-		.then(data => 
-			dispatch(receiveAllOrganizations(data))
+		.then(
+			data => dispatch(receiveAllOrganizations(data))
 		)
 	}
 }
 
-// Pull organizations by location search
+// Pull accepted organizations by location search
 const receiveOrganizationsByLocation = (data) => {
 	return {
 		type: RECEIVE_ORGANIZATIONS_BY_LOCATION,
@@ -45,11 +45,12 @@ const getOrganizationsByLocation = (address, distance) => {
 			  distance
 			}
 		})
-		.then(response => response.data,
+		.then(
+			response => response.data,
 			error => console.log('A request error occurred', error)
 		)
-		.then(data => 
-		  dispatch(receiveOrganizationsByLocation(data))
+		.then(
+			data => dispatch(receiveOrganizationsByLocation(data))
 		)
 	}
 }
@@ -80,9 +81,6 @@ const addOrganization = ({
 			response => response.data,
 			error => console.log('A request error occurred', error)
 		)
-		.then(data => 
-			dispatch(receiveAddedOrganization(data[0])),
-		)
 	}
 }
 
@@ -101,8 +99,8 @@ const updateOrganization = (updates) => {
 			response => response.data,
 			error => console.log('A request error occurred', error)
 		)
-		.then(data => 
-			dispatch(receiveUpdatedOrganization(data[0]))
+		.then(
+			data => dispatch(receiveUpdatedOrganization(data[0]))
 		)
 	}
 }
@@ -114,7 +112,8 @@ export {
 	RECEIVE_ALL_ORGANIZATIONS, 
 	getOrganizationsByLocation,
 	RECEIVE_ORGANIZATIONS_BY_LOCATION,
-	addOrganization, 
+	addOrganization,
+	receiveAddedOrganization,
 	RECEIVE_ADDED_ORGANIZATION, 
 	updateOrganization, 
 	RECEIVE_UDPATED_ORGANIZATION, 

@@ -4,9 +4,9 @@ import {
 	RECEIVE_USER_LOGIN,
 	LOGOUT_USER,
 	RECEIVEUSERFORUPDATE
-} from '../actions/userControls'
+} from '../actions/userControl'
 
-const userControlsReducerDefaultState = {
+const userControlReducerDefaultState = {
 	mapCenter: {
 		lat: 40.0149856,
 		lng: -105.2705456
@@ -20,7 +20,7 @@ const userControlsReducerDefaultState = {
 	updatingUser: {}
 }
 
-const userControlsReducer = (state = userControlsReducerDefaultState, action) => {
+const userControlReducer = (state = userControlReducerDefaultState, action) => {
 	switch (action.type) {
 		case SET_MAP_CENTER:
 			return {
@@ -56,4 +56,4 @@ const userControlsReducer = (state = userControlsReducerDefaultState, action) =>
 	}
 }
 
-export default userControlsReducer
+export default userControlReducer

@@ -5,7 +5,7 @@ import thunkMiddleware from 'redux-thunk'
 import organizationsReducer from '../reducers/organizations'
 import newOrganizationsReducer from '../reducers/newOrganizations'
 import filterReducer from '../reducers/filters'
-import userControlsReducer from '../reducers/userControls'
+import userControlReducer from '../reducers/userControl'
 import { addOrganization } from '../actions/organizations'
 // import { createLogger } from 'redux-logger'
 
@@ -17,7 +17,7 @@ const store = createStore(
 		organizations: organizationsReducer,
 		newOrganizations: newOrganizationsReducer,
 		filters: filterReducer,
-		userControls: userControlsReducer,
+		userControl: userControlReducer,
 		modal,
 		form: formReducer.plugin({
     		organizationForm: (state, action) => { 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { setSelectedModal } from '../actions/userControls'
+import { setSelectedModal } from '../actions/userControl'
 
 
 

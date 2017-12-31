@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
 import selectOrganizations from '../selectors/organizations'
-import { createUser, findUserForUpdate } from '../actions/userControls'
+import { createUser, findUserForUpdate } from '../actions/userControl'
 import { getNewOrganizations } from '../actions/newOrganizations'
 import SignUpForm from './SignUpForm'
 import FindUserForm from './FindUserForm'
@@ -77,7 +77,9 @@ class AdminPage extends React.Component {
 				</div>
 				<button onClick={this.pullNewOrgs}>show new orgs</button>
 				<div>
-					<NewOrganizationsList />
+					{this.props.newOrganizations.map(organization => {
+						return <NewOrganizationsList key={organization._id} organization={organization} {...organization} />
+					})}
 				</div>
 			</div>
 		)
@@ -87,8 +89,9 @@ class AdminPage extends React.Component {
 const mapStateToProps = (state, props) => {
   return {
   	visibleOrganizations: selectOrganizations(state.organizations, state.filters),
-    user: state.userControls.user,
-    updatingUser: state.userControls.updatingUser
+  	newOrganizations: state.newOrganizations,
+    user: state.userControl.user,
+    updatingUser: state.userControl.updatingUser
   }
 }
 

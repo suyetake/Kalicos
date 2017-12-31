@@ -42,7 +42,7 @@ const OrganizationsSchema = mongoose.Schema({
     required: true,
     type: String
   },
-  newlyAdded: {
+  isAccepted: {
     type: Boolean,
     default: true
   }

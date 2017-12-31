@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { logoutUser } from '../actions/userControls'
+import { logoutUser } from '../actions/userControl'
 
 const Header = (props) => (
       <div>
@@ -21,7 +21,7 @@ const Header = (props) => (
 
 const mapStateToProps = (state, props) => {
   return {
-    user: state.userControls.user
+    user: state.userControl.user
   }
 }
 

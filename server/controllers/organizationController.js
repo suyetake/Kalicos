@@ -24,8 +24,6 @@ module.exports = {
           type: 'Point',
           coordinates: [ response.lng, response.lat ]
         }
-        // const newlyAdded = true
-        console.log(response)
         const organization = new Organizations({ name, address, description, latLng, category })
         organization.save().then(() => {
           var find = Organizations.find({name})
@@ -70,11 +68,11 @@ module.exports = {
         })
       })
   },
-  updateNew(req, res) {
-    var { id } = req.body
+  acceptNew(req, res) {
+    var { _id } = req.body
     var update = Organizations.update(
-      { _id: id },
-      { $set: { newlyAdded: false } }
+      { _id },
+      { $set: { isAccepted: false } }
     )
     update.exec(function (err, org) {
       if (err) {
@@ -86,30 +84,36 @@ module.exports = {
     })
   },
   remove(req, res) {
-    var { id, name } = req.body
-    console.log(id)
-    var remove = Organizations.remove({ _id: id })
-    remove.exec(function (err) {
+    var { _id } = req.body
+    var remove = Organizations.remove({ _id })
+    remove.exec(function (err, org) {
+      if (err) {
+        console.log(err, org)
+      } else {
+        res.send(org.result)
+      }
+    })
+  },
+  findAllAcceptedLocations(req, res) {
+    var find = Organizations.find({ isAccepted: false })
+    find.exec(function (err, orgs) {
       if (err) {
         console.log(err)
+        res.send(err)
       } else {
-        res.status(200).send('Removed ' + name + ' ' + id)
+        res.send(orgs)
       }
     })
   },
   searchByLocation(req, res) {
     var { address, distance } = req.query
-    // find address location
-    console.log('query request', req.query)
-
     lookupAddress(address)
       .then(response => {
         var latLng = {
           type: 'Point',
           coordinates: [ response.lng, response.lat ]
         }
-        console.log(latLng)
-        var find = Organizations.find({ latLng: { $geoWithin: { $centerSphere: [ [ latLng.coordinates[0], latLng.coordinates[1] ], distance / 3963.2 ] } } })
+        var find = Organizations.find({ isAccepted: false, latLng: { $geoWithin: { $centerSphere: [ [ latLng.coordinates[0], latLng.coordinates[1] ], distance / 3963.2 ] } } })
         find.exec(function (err, orgs) {
           if (err) {
             console.log(err)
@@ -120,24 +124,9 @@ module.exports = {
           }
         })
       })
-      .catch(error => {
-        console.log(error)
-        res.send({ error: error.message })
-      })
   },
-  getAllLocations(req, res) {
-    var find = Organizations.find({})
-    find.exec(function (err, orgs) {
-      if (err) {
-        console.log(err)
-        res.send(err)
-      } else {
-        res.send(orgs)
-      }
-    })
-  },
-  getNewOrganizations(req, res) {
-    var find = Organizations.find({newlyAdded: true})
+  findNewOrganizations(req, res) {
+    var find = Organizations.find({isAccepted: true})
     find.exec(function (err, orgs) {
       if (err) {
         console.log(err)
