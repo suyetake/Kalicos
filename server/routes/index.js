@@ -19,4 +19,7 @@ module.exports = (app) => {
   app.get('/api/neworganizations', organizationController.getNewOrganizations)
   app.post('/api/organization', organizationController.create)
   app.put('/api/updateorganization', organizationController.update)
+  app.delete('/api/removeorganization', organizationController.remove)
+
+  app.put('/api/updateneworganization', organizationController.updateNew)
 }

@@ -23,8 +23,31 @@ const getNewOrganizations = () => {
 	}
 }
 
+const acceptNewOrganization = (id) => {
+	return (dispatch) => {
+		return axios.put('http://localhost:4000/api/updateneworganization', {
+			id
+		})
+		.then(response => response)
+		error => console.log('A request error occurred', error)
+	}
+}
+
+const rejectNewOrganization = (id) => {
+	return (dispatch) => {
+		return axios.put('http://localhost:4000/api/removeorganization', {
+			params: {
+				id
+			}
+		})
+		// .then()
+	}
+}
+
 
 export {
 	RECEIVE_NEW_ORGANIZATIONS,
-	getNewOrganizations
+	getNewOrganizations,
+	acceptNewOrganization,
+	rejectNewOrganization
 }

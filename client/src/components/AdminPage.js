@@ -7,7 +7,7 @@ import { getNewOrganizations } from '../actions/newOrganizations'
 import SignUpForm from './SignUpForm'
 import FindUserForm from './FindUserForm'
 import UserUpdateForm from './UserUpdateForm'
-import NewOrganizationsListItem from './NewOrganizationsListItem'
+import NewOrganizationsList from './NewOrganizationsList'
 
 
 
@@ -77,7 +77,7 @@ class AdminPage extends React.Component {
 				</div>
 				<button onClick={this.pullNewOrgs}>show new orgs</button>
 				<div>
-					<NewOrganizationsListItem />
+					<NewOrganizationsList />
 				</div>
 			</div>
 		)

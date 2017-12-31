@@ -50,7 +50,7 @@ module.exports = {
         }
         var update = Organizations.update(
           { _id: _id },
-          {$set: { name, category, description, address, latLng }}
+          { $set: { name, category, description, address, latLng } }
         )
         update.exec(function (err, org) {
           if (err) {
@@ -69,6 +69,33 @@ module.exports = {
           }
         })
       })
+  },
+  updateNew(req, res) {
+    var { id } = req.body
+    var update = Organizations.update(
+      { _id: id },
+      { $set: { newlyAdded: false } }
+    )
+    update.exec(function (err, org) {
+      if (err) {
+        console.log(err)
+        res.send(err)
+      } else {
+        res.send(org)
+      }
+    })
+  },
+  remove(req, res) {
+    var { id, name } = req.body
+    console.log(id)
+    var remove = Organizations.remove({ _id: id })
+    remove.exec(function (err) {
+      if (err) {
+        console.log(err)
+      } else {
+        res.status(200).send('Removed ' + name + ' ' + id)
+      }
+    })
   },
   searchByLocation(req, res) {
     var { address, distance } = req.query
