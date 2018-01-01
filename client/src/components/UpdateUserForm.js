@@ -1,7 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 
-let SignUpForm = (props) => {
+let UpdateUserForm = (props) => {
 	return (
 		<div>
 			<form onSubmit={props.handleSubmit}>
@@ -19,12 +20,19 @@ let SignUpForm = (props) => {
 					type="text"
 					placeholder="Enter email"
 				/>
-				<label>Password</label>
+				<label>oldPassword</label>
 				<Field 
-					name="password"
+					name="oldPassword"
 					component="input"
 					type="password"
-					placeholder="Enter password"
+					placeholder="Enter old password"
+				/>
+				<label>newPassword</label>
+				<Field 
+					name="newPassword"
+					component="input"
+					type="password"
+					placeholder="Enter new password"
 				/>
 				<label>Access Level</label>
 				<Field 
@@ -35,14 +43,22 @@ let SignUpForm = (props) => {
 					<option value="standard">Standard</option>
 		            <option value="admin">Admin</option>
          		 </Field>
-         		 <button type="submit">Create User</button>
+         		 <button type="submit">Update User</button>
 			</form>
 		</div>
 	)
 }
 
-SignUpForm = reduxForm({
-  form: 'signUpForm'
-})(SignUpForm)
+UpdateUserForm = reduxForm({
+  form: 'updateUserForm'
+})(UpdateUserForm)
 
-export default SignUpForm
+UpdateUserForm = connect(
+  ( state, props ) => {
+    return {
+      initialValues: props.updatingUser
+    }
+  }
+)(UpdateUserForm)
+
+export default UpdateUserForm

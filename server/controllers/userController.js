@@ -2,12 +2,13 @@ const Users     = require('../models/userModel')
 const passport  = require('passport')
 const bCrypt   = require('bcrypt-nodejs')
 
+const generateHash = (password) => {
+  return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null)
+}
+
 module.exports = {
   create(req, res) {
     console.log(req.body)
-    const generateHash = function(password) {
-      return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null)
-    }
     const { username, email, accessLevel } = req.body
     const password = generateHash(req.body.password)
     const user = new Users({ username, email, password, accessLevel })
@@ -20,9 +21,49 @@ module.exports = {
       if (err) {
         return (err)
       } else {
-        const returnedUser = { accessLevel: user.accessLevel, email: user.email, username: user.username }
+        let returnedUser = { _id: user._id, accessLevel: user.accessLevel, email: user.email, username: user.username }
         return res.send(returnedUser)
       }
     })(req, res)
+  },
+  findUserForUpdate(req, res) {
+    var { email } = req.query
+    var find = Users.findOne({ email })
+    find.exec(function (err, user) {
+      if (err) {
+        console.log(err)
+        res.send(err)
+      } else {
+        let returnedUser = { _id: user._id, accessLevel: user.accessLevel, email: user.email, username: user.username }
+        res.send(returnedUser)
+      }
+    })
+  },
+  update(req, res) {
+    var { _id, username, email, oldPassword, newPassword, accessLevel } = req.body
+    var findOne = Users.findOne({ _id })
+    // find user to confirm old password
+    findOne.exec(function (err, user) {
+      if (err) {
+        console.log(err)
+      } else {
+        // if old password matches, update user
+        if (generateHash(oldPassword === user.password)) {
+          var newHashedPassword = generateHash(newPassword)
+          var update = Users.update(
+            { _id },
+            { $set: { username, email, password: newHashedPassword, accessLevel } }
+          )
+          update.exec(function (err, user) {
+            if (err) {
+              console.log(err)
+              res.send(err)
+            } else {
+              console.log(user)
+            }
+          })
+        }
+      }
+    })
   }
 }

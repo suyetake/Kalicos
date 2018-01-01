@@ -3,8 +3,9 @@ import { reducer as formReducer } from 'redux-form'
 import { reducer as modal } from 'redux-modal'
 import thunkMiddleware from 'redux-thunk'
 import organizationsReducer from '../reducers/organizations'
+import newOrganizationsReducer from '../reducers/newOrganizations'
 import filterReducer from '../reducers/filters'
-import userControlsReducer from '../reducers/userControls'
+import userControlReducer from '../reducers/userControl'
 import { addOrganization } from '../actions/organizations'
 // import { createLogger } from 'redux-logger'
 
@@ -14,8 +15,9 @@ export default () => {
 const store = createStore(
 	combineReducers({
 		organizations: organizationsReducer,
+		newOrganizations: newOrganizationsReducer,
 		filters: filterReducer,
-		userControls: userControlsReducer,
+		userControl: userControlReducer,
 		modal,
 		form: formReducer.plugin({
     		organizationForm: (state, action) => { 

@@ -9,19 +9,19 @@ import { Provider } from 'react-redux'
 import { getAllOrganizations } from './actions/organizations'
 import getVisibleOrganizations from './selectors/organizations'
 
-import axios from 'axios'
+// import axios from 'axios'
 
-// const createU = () => {
-// axios.post('http://localhost:4000/api/createuser', {
-//         email: 'email@email.com',
-//         username: 'devon',
-//         password: 'devon',
-//         accessLevel: 'admin'
-//     })
-//     .then(response => console.log('login res', response))
+// const createU = (id, name) => {
+//   axios.delete('http://localhost:4000/api/removeorganization', {
+//     data: {
+//       id,
+//       name
+//     }     
+//   })
+//   .then(response => console.log('login res', response))
 // }
 
-// createU()
+// createU("5a48a18e37430c5731dbe51f", "Haoway")
 
 
 const store = configureStore();

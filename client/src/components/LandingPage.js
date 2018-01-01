@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import LandingForm from './LandingForm'
 import { geocodeAddress } from '../utils'
-import { setMapCenter } from '../actions/userControls'
+import { setMapCenter } from '../actions/userControl'
 import { getOrganizationsByLocation } from '../actions/organizations'
 
 

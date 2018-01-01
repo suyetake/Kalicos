@@ -2,10 +2,12 @@ import {
 	SET_MAP_CENTER,
 	SET_SELECTED_MODAL,
 	RECEIVE_USER_LOGIN,
-	LOGOUT_USER
-} from '../actions/userControls'
+	LOGOUT_USER,
+	RECEIVE_USER_FOR_UPDATE,
+	CLEAR_USER_FOR_UPDATE
+} from '../actions/userControl'
 
-const userControlsReducerDefaultState = {
+const userControlReducerDefaultState = {
 	mapCenter: {
 		lat: 40.0149856,
 		lng: -105.2705456
@@ -15,10 +17,11 @@ const userControlsReducerDefaultState = {
 		accessLevel: '',
 		email: '',
 		username: ''
-	}
+	},
+	updatingUser: {}
 }
 
-const userControlsReducer = (state = userControlsReducerDefaultState, action) => {
+const userControlReducer = (state = userControlReducerDefaultState, action) => {
 	switch (action.type) {
 		case SET_MAP_CENTER:
 			return {
@@ -44,9 +47,19 @@ const userControlsReducer = (state = userControlsReducerDefaultState, action) =>
 					username: ''
 				}
 			}
+		case RECEIVE_USER_FOR_UPDATE:
+			return {
+				...state,
+				updatingUser: action.user
+			}
+		case CLEAR_USER_FOR_UPDATE:
+			return {
+				...state,
+				updatingUser: {}
+			}
 		default:
 			return state
 	}
 }
 
-export default userControlsReducer
+export default userControlReducer

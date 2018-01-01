@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { logoutUser } from '../actions/userControls'
+import { logoutUser } from '../actions/userControl'
 
 const Header = (props) => (
       <div>
@@ -12,7 +12,7 @@ const Header = (props) => (
           <li><Link to="/about">About</Link></li>
           {props.user.username === '' && <li><Link to="/login">Login</Link></li>}
           {props.user.accessLevel === 'admin' && <li><Link to="/admin">Admin</Link></li>}
-          {props.user.username !== '' && <button onClick={() => {
+          {props.user.username && <button onClick={() => {
           	props.dispatch(logoutUser())
           }}>Logout</button>}
         </ul>
@@ -21,7 +21,7 @@ const Header = (props) => (
 
 const mapStateToProps = (state, props) => {
   return {
-    user: state.userControls.user
+    user: state.userControl.user
   }
 }
 

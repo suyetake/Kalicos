@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { mapsApiKey } from '../config'
 import OrganizationListFilters from './OrganizationListFilters'
 import selectOrganizations from '../selectors/organizations'
-import { setSelectedModal } from '../actions/userControls'
+import { setSelectedModal } from '../actions/userControl'
 import MapModalView from './MapModalView'
 
 import GoogleMapReact from 'google-map-react'
@@ -78,8 +78,8 @@ class MapPage extends React.Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    latLng: state.userControls.mapCenter,
-    selectedModal: state.userControls.modal,
+    latLng: state.userControl.mapCenter,
+    selectedModal: state.userControl.modal,
     visibleOrganizations: selectOrganizations(state.organizations, state.filters)
   }
 }

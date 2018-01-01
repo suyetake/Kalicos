@@ -8,15 +8,18 @@ module.exports = (app) => {
   // ==================================================
   // user routes
   // ==================================================
+  app.get('/api/user', userController.findUserForUpdate)
   app.post('/login', userController.login)
   app.post('/api/createuser', userController.create)
-  // app.post('/signup', userController.signup)
-
   app.post('/api/user', userController.create)
-  // app.put('/api/updateuser', userController.update)
+  app.put('/api/updateuser', userController.update)
 
   app.get('/api/organization', organizationController.searchByLocation)
-  app.get('/api/organizations', organizationController.getAllLocations)
+  app.get('/api/organizations', organizationController.findAllAcceptedLocations)
+  app.get('/api/neworganizations', organizationController.findNewOrganizations)
   app.post('/api/organization', organizationController.create)
   app.put('/api/updateorganization', organizationController.update)
+  app.delete('/api/removeorganization', organizationController.remove)
+
+  app.put('/api/acceptneworganization', organizationController.acceptNew)
 }
