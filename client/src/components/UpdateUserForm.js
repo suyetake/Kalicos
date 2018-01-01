@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 
-let UserUpdateForm = (props) => {
+let UpdateUserForm = (props) => {
 	return (
 		<div>
-			<form onSubmit={props.handleUserUpdateSubmit}>
+			<form onSubmit={props.handleSubmit}>
 				<label>Username</label>
 				<Field 
 					name="username"
@@ -49,16 +49,16 @@ let UserUpdateForm = (props) => {
 	)
 }
 
-UserUpdateForm = reduxForm({
-  form: 'userUpdateForm'
-})(UserUpdateForm)
+UpdateUserForm = reduxForm({
+  form: 'updateUserForm'
+})(UpdateUserForm)
 
-UserUpdateForm = connect(
+UpdateUserForm = connect(
   ( state, props ) => {
     return {
       initialValues: props.updatingUser
     }
   }
-)(UserUpdateForm)
+)(UpdateUserForm)
 
-export default UserUpdateForm
+export default UpdateUserForm

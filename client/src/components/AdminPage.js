@@ -2,11 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
 import selectOrganizations from '../selectors/organizations'
-import { createUser, findUserForUpdate } from '../actions/userControl'
+import { createUser, findUserForUpdate, updateUser, clearUserForUpdate } from '../actions/userControl'
 import { getNewOrganizations } from '../actions/newOrganizations'
 import SignUpForm from './SignUpForm'
 import FindUserForm from './FindUserForm'
-import UserUpdateForm from './UserUpdateForm'
+import UpdateUserForm from './UpdateUserForm'
 import NewOrganizationsList from './NewOrganizationsList'
 
 
@@ -28,7 +28,6 @@ class AdminPage extends React.Component {
 	}
 
 	handleSignUpSubmit = (user) => {
-		// console.log(user)
 		this.props.dispatch(createUser(user))
 		this.props.dispatch(reset('signUpForm'))
 	}
@@ -38,8 +37,10 @@ class AdminPage extends React.Component {
 		this.props.dispatch(reset('findUserForm'))
 	}
 
-	handleUserUpdateSubmit = (user) => {
-		console.log(user)
+	handleUpdateUserSubmit = (user) => {
+		this.props.dispatch(updateUser(user))
+		this.props.dispatch(clearUserForUpdate())
+		this.props.dispatch(reset('updateUserForm'))
 	}
 
 	pullNewOrgs = () => {
@@ -70,9 +71,9 @@ class AdminPage extends React.Component {
 				<br/>
 				<p>Update Found User</p>
 				<div>
-					<UserUpdateForm
+					<UpdateUserForm
 						updatingUser={this.props.updatingUser}
-						onSubmit={this.handleUserUpdateSubmit}
+						onSubmit={this.handleUpdateUserSubmit}
 					/>
 				</div>
 				<button onClick={this.pullNewOrgs}>show new orgs</button>

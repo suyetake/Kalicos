@@ -3,7 +3,8 @@ import {
 	SET_SELECTED_MODAL,
 	RECEIVE_USER_LOGIN,
 	LOGOUT_USER,
-	RECEIVEUSERFORUPDATE
+	RECEIVE_USER_FOR_UPDATE,
+	CLEAR_USER_FOR_UPDATE
 } from '../actions/userControl'
 
 const userControlReducerDefaultState = {
@@ -46,10 +47,15 @@ const userControlReducer = (state = userControlReducerDefaultState, action) => {
 					username: ''
 				}
 			}
-		case RECEIVEUSERFORUPDATE:
+		case RECEIVE_USER_FOR_UPDATE:
 			return {
 				...state,
 				updatingUser: action.user
+			}
+		case CLEAR_USER_FOR_UPDATE:
+			return {
+				...state,
+				updatingUser: {}
 			}
 		default:
 			return state
