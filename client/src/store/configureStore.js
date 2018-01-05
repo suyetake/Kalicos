@@ -12,28 +12,28 @@ import { addOrganization } from '../actions/organizations'
 // const loggerMiddleware = createLogger()
 
 export default () => {
-const store = createStore(
-	combineReducers({
-		organizations: organizationsReducer,
-		newOrganizations: newOrganizationsReducer,
-		filters: filterReducer,
-		userControl: userControlReducer,
-		modal,
-		form: formReducer.plugin({
+  const store = createStore(
+	  combineReducers({
+		  organizations: organizationsReducer,
+		  newOrganizations: newOrganizationsReducer,
+		  filters: filterReducer,
+		  userControl: userControlReducer,
+		  modal,
+		  form: formReducer.plugin({
     		organizationForm: (state, action) => { 
-      			switch(action.type) {
-        			case addOrganization:
-          				return undefined; 
-          			default:
-          				return state
-				}
-			}
-		})
-	}),
-	compose(
+      		switch(action.type) {
+        	case addOrganization:
+          	return undefined; 
+          default:
+          	return state
+				  }
+			  }
+		  })
+	  }),
+	  compose(
 	    applyMiddleware( thunkMiddleware ),
 	    window.devToolsExtension ? window.devToolsExtension() : f => f
-	)
-)
+	  )
+  )
 	return store
 }
