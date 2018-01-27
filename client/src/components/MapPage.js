@@ -61,7 +61,7 @@ class MapPage extends React.Component {
               if (organization._id === props.selectedModal) {
                 return <MapModalView key={organization._id} {...organization} dispatch={props.dispatch}/>
               } else {
-                // removes console warning of arrow function return statement
+                // removes return statement console warning
                 return null
               }
             })}

@@ -6,6 +6,7 @@ import organizationsReducer from '../reducers/organizations'
 import newOrganizationsReducer from '../reducers/newOrganizations'
 import filterReducer from '../reducers/filters'
 import userControlReducer from '../reducers/userControl'
+import adminControlReducer from '../reducers/adminControl'
 import { addOrganization } from '../actions/organizations'
 // import { createLogger } from 'redux-logger'
 
@@ -18,6 +19,7 @@ export default () => {
 		  newOrganizations: newOrganizationsReducer,
 		  filters: filterReducer,
 		  userControl: userControlReducer,
+		  adminControl: adminControlReducer,
 		  modal,
 		  form: formReducer.plugin({
     		organizationForm: (state, action) => { 

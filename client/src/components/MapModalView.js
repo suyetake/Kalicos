@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { setSelectedModal } from '../actions/userControl'
 
 
@@ -10,8 +9,6 @@ import { setSelectedModal } from '../actions/userControl'
   return (
     <div >
       <button onClick={() => dispatch(setSelectedModal({id: ''}))}>X</button>
-      <li>Edit <Link to={`/edit/${_id}`}> {name}</Link>
-      </li>
       <li>{_id}</li>
       <li>{name}</li>
       <li>{category}</li>

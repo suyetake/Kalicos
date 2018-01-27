@@ -3,7 +3,7 @@ const filtersReducerDefaultState = {
 	description: '',
 	address: '',
 	category: ''
-};
+}
 
 const filtersReducer = (state = filtersReducerDefaultState, action) => {
 	switch (action.type) {
@@ -30,6 +30,6 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
 		default:
 			return state;
 	}
-};
+}
 
-export default filtersReducer;
+export default filtersReducer
