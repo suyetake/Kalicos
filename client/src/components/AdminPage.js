@@ -5,6 +5,7 @@ import selectOrganizations from '../selectors/organizations'
 import { createUser } from '../actions/userControl'
 import { findUserForUpdate, findOrganizationForUpdate } from '../actions/adminControl'
 import { getNewOrganizations } from '../actions/newOrganizations'
+import AddOrganizationPage from './AddOrganizationPage'
 import SignUpForm from './SignUpForm'
 import FindUserForm from './FindUserForm'
 import FindOrganizationForm from './FindOrganizationForm'
@@ -56,6 +57,11 @@ class AdminPage extends React.Component {
 			<div>
 				<div>
 					<p>Welcome {this.props.user.username}!</p>
+				</div>
+
+				<div>
+					<p>Add a new Organization</p>
+					<AddOrganizationPage />
 				</div>
 				<div>
 					<p>Create new user account</p>
