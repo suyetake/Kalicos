@@ -7,11 +7,6 @@ import { reset } from 'redux-form'
 
 class AddOrganizationPage extends React.Component {
 
-	componentWillMount () {
-		if (this.props.user.accessLevel !== 'admin') {
-			this.props.history.push('/')
-		} 
-	}
 
 	handleSubmit = (organization) => {
   			this.props.dispatch(addOrganization({
@@ -30,10 +25,5 @@ class AddOrganizationPage extends React.Component {
 	}
 }
 
-const mapStateToProps = (state, props) => {
-	return {
-		user: state.userControl.user
-	}
-}
 
-export default connect(mapStateToProps)(AddOrganizationPage)
+export default connect()(AddOrganizationPage)

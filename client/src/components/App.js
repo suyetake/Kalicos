@@ -24,7 +24,6 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={ LandingPage } />
           <Route path="/about" component={ About } />
-          <Route path="/add" component={ AddOrganizationPage } />
           <Route path="/edit/:id" component={ EditOrganizationPage } />
           <Route path="/editUser/:id" component={ EditUserPage } />
           <Route path="/maps" component={ MapPage } />
