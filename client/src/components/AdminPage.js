@@ -20,13 +20,6 @@ class AdminPage extends React.Component {
 		} 
 	}
 
-	// temporary work around until Logout button can do history.push (in Header.js)
-	componentDidUpdate () {
-		if (this.props.user.accessLevel !== 'admin') {
-			this.props.history.push('/')
-		} 
-	}
-
 	handleSignUpSubmit = (user) => {
 		this.props.dispatch(createUser(user))
 		this.props.dispatch(reset('signUpForm'))
@@ -57,6 +50,7 @@ class AdminPage extends React.Component {
 					<p>Welcome {this.props.user.username}!</p>
 					<button onClick={() => {
 						this.props.dispatch(logoutUser())
+						this.props.history.push('/')
 					}}>Logout</button>
 				</div>
 
