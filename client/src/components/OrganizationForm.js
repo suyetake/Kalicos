@@ -46,8 +46,6 @@ let OrganizationForm = (props) => {
       Example addresses to add:</p>
       <li>1600 Range St #101, Boulder, CO 80301</li>
       <p>Code Craft</p>
-      <li>1678 30th St, Boulder, CO 80301</li>
-      <p>Haoway</p>
       <li>1777 Broadway, Boulder, CO 80302</li>
       <p>Courthouse
       ***</p>

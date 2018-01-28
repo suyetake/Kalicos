@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
 import selectOrganizations from '../selectors/organizations'
-import { createUser } from '../actions/userControl'
+import { createUser, logoutUser } from '../actions/userControl'
 import { findUserForUpdate, findOrganizationForUpdate } from '../actions/adminControl'
 import { getNewOrganizations } from '../actions/newOrganizations'
 import AddOrganizationPage from './AddOrganizationPage'
@@ -10,8 +10,6 @@ import SignUpForm from './SignUpForm'
 import FindUserForm from './FindUserForm'
 import FindOrganizationForm from './FindOrganizationForm'
 import NewOrganizationsList from './NewOrganizationsList'
-
-
 
 
 class AdminPage extends React.Component {
@@ -57,6 +55,9 @@ class AdminPage extends React.Component {
 			<div>
 				<div>
 					<p>Welcome {this.props.user.username}!</p>
+					<button onClick={() => {
+						this.props.dispatch(logoutUser())
+					}}>Logout</button>
 				</div>
 
 				<div>
