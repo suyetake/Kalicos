@@ -2,26 +2,19 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
 import selectOrganizations from '../selectors/organizations'
-import { createUser, findUserForUpdate, updateUser, clearUserForUpdate } from '../actions/userControl'
+import { createUser, logoutUser } from '../actions/userControl'
+import { findUserForUpdate, findOrganizationForUpdate } from '../actions/adminControl'
 import { getNewOrganizations } from '../actions/newOrganizations'
+import AddOrganizationPage from './AddOrganizationPage'
 import SignUpForm from './SignUpForm'
 import FindUserForm from './FindUserForm'
-import UpdateUserForm from './UpdateUserForm'
+import FindOrganizationForm from './FindOrganizationForm'
 import NewOrganizationsList from './NewOrganizationsList'
-
-
 
 
 class AdminPage extends React.Component {
 
 	componentWillMount () {
-		if (this.props.user.accessLevel !== 'admin') {
-			this.props.history.push('/')
-		} 
-	}
-
-	// temporary work around until Logout button can do history.push (in Header.js)
-	componentDidUpdate () {
 		if (this.props.user.accessLevel !== 'admin') {
 			this.props.history.push('/')
 		} 
@@ -34,13 +27,14 @@ class AdminPage extends React.Component {
 
 	handleFindUserSubmit = (user) => {
 		this.props.dispatch(findUserForUpdate(user.email))
+		.then(user => this.props.history.push(`/editUser/${this.props.updatingUser._id}`))
 		this.props.dispatch(reset('findUserForm'))
 	}
 
-	handleUpdateUserSubmit = (user) => {
-		this.props.dispatch(updateUser(user))
-		this.props.dispatch(clearUserForUpdate())
-		this.props.dispatch(reset('updateUserForm'))
+	handleFindOrganizationSubmit = (organization) => {
+		this.props.dispatch(findOrganizationForUpdate(organization.name))
+		.then(org => this.props.history.push(`/edit/${this.props.updatingOrganization._id}`))
+		this.props.dispatch(reset('findOrganizationForm'))
 	}
 
 	pullNewOrgs = () => {
@@ -54,6 +48,15 @@ class AdminPage extends React.Component {
 			<div>
 				<div>
 					<p>Welcome {this.props.user.username}!</p>
+					<button onClick={() => {
+						this.props.dispatch(logoutUser())
+						this.props.history.push('/')
+					}}>Logout</button>
+				</div>
+
+				<div>
+					<p>Add a new Organization</p>
+					<AddOrganizationPage />
 				</div>
 				<div>
 					<p>Create new user account</p>
@@ -62,20 +65,20 @@ class AdminPage extends React.Component {
 					/>
 				</div>
 				<br/>
-				<p>Find User</p>
+				<p>Find User to update</p>
 				<div>
 					<FindUserForm 
 						onSubmit={this.handleFindUserSubmit}
 					/>
 				</div>
 				<br/>
-				<p>Update Found User</p>
+				<p>Find Organization to update</p>
 				<div>
-					<UpdateUserForm
-						updatingUser={this.props.updatingUser}
-						onSubmit={this.handleUpdateUserSubmit}
+					<FindOrganizationForm 
+						onSubmit={this.handleFindOrganizationSubmit}
 					/>
 				</div>
+				<br/>
 				<button onClick={this.pullNewOrgs}>show new orgs</button>
 				<div>
 					{this.props.newOrganizations.map(organization => {
@@ -92,7 +95,8 @@ const mapStateToProps = (state, props) => {
   	visibleOrganizations: selectOrganizations(state.organizations, state.filters),
   	newOrganizations: state.newOrganizations,
     user: state.userControl.user,
-    updatingUser: state.userControl.updatingUser
+    updatingUser: state.adminControl.updatingUser,
+    updatingOrganization: state.adminControl.updatingOrganization
   }
 }
 

@@ -2,9 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import OrganizationForm from './OrganizationForm'
 import { updateOrganization } from '../actions/organizations'
+import { clearUpdatedOrganization } from '../actions/adminControl'
 
 
 class EditOrganizationPage extends React.Component {
+
+	componentWillMount () {
+		if (this.props.user.accessLevel !== 'admin') {
+			this.props.history.push('/')
+		} 
+	}
+
 	render() {
 		let props = this.props
 		return (
@@ -16,8 +24,9 @@ class EditOrganizationPage extends React.Component {
 			  			this.props.dispatch(updateOrganization(
 			  				{...organization}
 			  			))
+			  			this.props.dispatch(clearUpdatedOrganization())
+			  			this.props.history.push('/admin')
 					}}
-					match={parseInt(props.match.params._id, 10)}
 				/>
 			</div>
 		)
@@ -26,7 +35,8 @@ class EditOrganizationPage extends React.Component {
 
 const mapStateToProps = (state, props) => {
 	return {
-		organization: state.organizations.find((organization) => organization._id === props.match.params.id)
+		user: state.userControl.user,
+		organization: state.adminControl.updatingOrganization
 	}
 }
 

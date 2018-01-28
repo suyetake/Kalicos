@@ -7,7 +7,7 @@ import { loginUser } from '../actions/userControl'
 class LoginPage extends React.Component {
 	handleSubmit = (login) => {
 		this.props.dispatch(loginUser(login.username, login.password))
-		this.props.history.push('/')
+		.then(user => this.props.history.push('/admin'))
 	}
 	render() {
 		return (

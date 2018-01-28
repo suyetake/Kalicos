@@ -6,6 +6,8 @@ import { reset } from 'redux-form'
 
 
 class AddOrganizationPage extends React.Component {
+
+
 	handleSubmit = (organization) => {
   			this.props.dispatch(addOrganization({
 				...organization
@@ -22,5 +24,6 @@ class AddOrganizationPage extends React.Component {
 		)
 	}
 }
+
 
 export default connect()(AddOrganizationPage)

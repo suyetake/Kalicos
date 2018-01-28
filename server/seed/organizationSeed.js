@@ -14,7 +14,7 @@ const organizations = [
       coordinates: [ -105.2733468, 40.0092355 ]
     },
     address: '6672 Gunpark Dr, Boulder, CO 80301',
-    isAccepted: false
+    isAccepted: true
   },
   {
     _id:   new ObjectID(),
@@ -26,7 +26,7 @@ const organizations = [
       coordinates: [ -105.281769, 40.013952 ]
     },
     address: '1001 Arapahoe Ave, Boulder, CO, 80302',
-    isAccepted: false
+    isAccepted: true
   },
   {
     _id:   new ObjectID(),
@@ -38,7 +38,7 @@ const organizations = [
       coordinates: [ -105.0890096, 39.9984502 ]
     },
     address: '6672 Gunpark Drive, Boulder, CO, 80302',
-    isAccepted: false
+    isAccepted: true
   },
   {
     _id:   new ObjectID(),
@@ -50,7 +50,7 @@ const organizations = [
       coordinates: [ -105.2526285, 40.0163854 ]
     },
     address: '1678 30th St, Boulder, CO 80301',
-    newlyAdded: true
+    isAccepted: false
   }
 ]
 

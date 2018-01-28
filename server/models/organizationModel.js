@@ -44,7 +44,7 @@ const OrganizationsSchema = mongoose.Schema({
   },
   isAccepted: {
     type: Boolean,
-    default: true
+    default: false
   }
 })
 

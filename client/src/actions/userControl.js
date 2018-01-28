@@ -4,8 +4,6 @@ const RECEIVE_USER_LOGIN = 'RECEIVE_USER_LOGIN'
 const SET_MAP_CENTER = 'SET_MAP_CENTER'
 const SET_SELECTED_MODAL = 'SET_SELECTED_MODAL'
 const LOGOUT_USER = 'LOGOUT_USER'
-const RECEIVE_USER_FOR_UPDATE = 'RECEIVE_USER_FOR_UPDATE'
-const CLEAR_USER_FOR_UPDATE = 'CLEAR_USER_FOR_UPDATE'
 
 // set google map center by geocoded entered address or zip
 const setMapCenter = (mapCenter) => {
@@ -66,49 +64,6 @@ const createUser= ({username, email, password, accessLevel}) => {
 	}
 }
 
-// retrieve one user to update on admin page
-const findUserForUpdate = (email) => {
-	return (dispatch) => {
-		console.log('email', email)
-		return axios.get('http://localhost:4000/api/user', {
-			params: {
-				email
-			}
-		})
-		.then(
-			response => response.data,
-			error => console.log('A request error occurred', error)
-		)
-		.then(
-			data => dispatch(receiveUserForUpdate(data))
-		)
-	}
-}
-
-const receiveUserForUpdate = (user) => {
-	return {
-		type: RECEIVE_USER_FOR_UPDATE,
-		user
-	}
-}
-
-// update user on admin page 
-const updateUser = (updates) => {
-	return (dispatch) => {
-		return axios.put('http://localhost:4000/api/updateuser', updates)
-		.then(
-			response => console.log(response.data),
-			error => console.log('A request error occurred', error)
-		)
-	}
-}
-
-const clearUserForUpdate = () => {
-	return {
-		type: CLEAR_USER_FOR_UPDATE,
-	}
-}
-
 
 export { 
 	SET_MAP_CENTER,
@@ -119,10 +74,5 @@ export {
 	loginUser,
 	logoutUser,
 	LOGOUT_USER,
-	createUser,
-	findUserForUpdate,
-	RECEIVE_USER_FOR_UPDATE,
-	updateUser,
-	CLEAR_USER_FOR_UPDATE,
-	clearUserForUpdate
+	createUser
 }

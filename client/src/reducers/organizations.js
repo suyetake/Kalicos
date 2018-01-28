@@ -2,10 +2,10 @@ import {
 	RECEIVE_ALL_ORGANIZATIONS, 
 	RECEIVE_ADDED_ORGANIZATION, 
 	RECEIVE_UDPATED_ORGANIZATION,
-	RECEIVE_ORGANIZATIONS_BY_LOCATION 
+	RECEIVE_ORGANIZATIONS_BY_LOCATION
 } from '../actions/organizations'
 
-const organizationsReducerDefaultState = [];
+const organizationsReducerDefaultState = []
 
 const organizationsReducer = (state = organizationsReducerDefaultState, action) => {
 	switch (action.type) {
@@ -34,8 +34,8 @@ const organizationsReducer = (state = organizationsReducerDefaultState, action) 
 				}
 			})
 		default:
-			return state;
+			return state
 	}
-};
+}
 
-export default organizationsReducer;
+export default organizationsReducer

@@ -28,7 +28,7 @@ const getNewOrganizations = () => {
 // admin acceptance of new organization. updates org in db and adds to orgs array on map
 const acceptNewOrganization = (organization) => {
 	return (dispatch) => {
-		return axios.put('http://localhost:4000/api/acceptneworganization', {
+		return axios.put('http://localhost:4000/api/acceptnew', {
 			_id: organization._id
 		})
 		.then(

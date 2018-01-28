@@ -16,6 +16,7 @@ function lookupAddress(address) {
 }
 
 module.exports = {
+  // user creates one organization
   create(req, res) {
     var { name, address, description, category } = req.body
     lookupAddress(address)
@@ -38,6 +39,7 @@ module.exports = {
         })
       })
   },
+  // admin updates one organization
   update(req, res) {
     var { _id, name, category, description, address } = req.body
     lookupAddress(address)
@@ -68,11 +70,12 @@ module.exports = {
         })
       })
   },
+  // admin accepts a newly added organization
   acceptNew(req, res) {
     var { _id } = req.body
     var update = Organizations.update(
       { _id },
-      { $set: { isAccepted: false } }
+      { $set: { isAccepted: true } }
     )
     update.exec(function (err, org) {
       if (err) {
@@ -83,6 +86,22 @@ module.exports = {
       }
     })
   },
+  // admin accepts all newly added organizations
+  acceptAllNew(req, res) {
+    var update = Organizations.update(
+      { isAccepted: false },
+      { $set: { isAccepted: true } }
+    )
+    update.exec(function (err, orgs) {
+      if (err) {
+        console.log(err)
+        res.send(err)
+      } else {
+        res.send(orgs)
+      }
+    })
+  },
+  // admin rejects a newly added organization
   remove(req, res) {
     var { _id } = req.body
     var remove = Organizations.remove({ _id })
@@ -94,8 +113,20 @@ module.exports = {
       }
     })
   },
+  // admin rejects all newly added organization
+  rejectAllNew(req, res) {
+    var remove = Organizations.remove({ isAccepted: false })
+    remove.exec(function (err, orgs) {
+      if (err) {
+        console.log(err)
+      } else {
+        res.send(orgs.result)
+      }
+    })
+  },
+  // currently used on initial page load. will remove in future or become admin only ability
   findAllAcceptedLocations(req, res) {
-    var find = Organizations.find({ isAccepted: false })
+    var find = Organizations.find({ isAccepted: true })
     find.exec(function (err, orgs) {
       if (err) {
         console.log(err)
@@ -105,6 +136,7 @@ module.exports = {
       }
     })
   },
+  // get all accepted organizations by entered location and distance
   searchByLocation(req, res) {
     var { address, distance } = req.query
     lookupAddress(address)
@@ -113,20 +145,20 @@ module.exports = {
           type: 'Point',
           coordinates: [ response.lng, response.lat ]
         }
-        var find = Organizations.find({ isAccepted: false, latLng: { $geoWithin: { $centerSphere: [ [ latLng.coordinates[0], latLng.coordinates[1] ], distance / 3963.2 ] } } })
+        var find = Organizations.find({ isAccepted: true, latLng: { $geoWithin: { $centerSphere: [ [ latLng.coordinates[0], latLng.coordinates[1] ], distance / 3963.2 ] } } })
         find.exec(function (err, orgs) {
           if (err) {
             console.log(err)
             res.send(err)
           } else {
-            console.log('orgs sent', orgs)
             res.send(orgs)
           }
         })
       })
   },
+  // get all newly added organizations for admin
   findNewOrganizations(req, res) {
-    var find = Organizations.find({isAccepted: true})
+    var find = Organizations.find({isAccepted: false})
     find.exec(function (err, orgs) {
       if (err) {
         console.log(err)
@@ -134,6 +166,19 @@ module.exports = {
       } else {
         console.log(orgs)
         res.send(orgs)
+      }
+    })
+  },
+  // get an organization for an admin to update
+  findOneOrganization(req, res) {
+    var { name } = req.query
+    var find = Organizations.findOne({ name: name })
+    find.exec(function (err, org) {
+      if (err) {
+        console.log(err)
+        res.send(err)
+      } else {
+        res.send(org)
       }
     })
   }
