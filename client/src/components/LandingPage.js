@@ -8,19 +8,18 @@ import { getOrganizationsByLocation } from '../actions/organizations'
 
 class LandingPage extends React.Component {
 	handleSubmit = (search) => {
-		this.props.dispatch(getOrganizationsByLocation(search.address, search.distance))
+		this.props.dispatch(getOrganizationsByLocation(search.address))
 		geocodeAddress(search.address)
 			.then(latLng => this.props.dispatch(setMapCenter(latLng)))
-		this.props.history.push('/maps')
+			.then(() => this.props.history.push('/maps'))
 	}
 	render() {
 		return (
 			<div>
+				<p>Find a charity near</p>
 				<LandingForm 
 					onSubmit={this.handleSubmit}
 				/>
-				<br/>
-				<p>Find locations within area of zip code or address</p>
 			</div>
 		)
 	}

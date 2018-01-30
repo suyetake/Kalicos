@@ -13,6 +13,8 @@ const setMapCenter = (mapCenter) => {
 		mapCenter
 	}
 }
+
+
 const setSelectedModal = (id) => {
 	return {
 		type: SET_SELECTED_MODAL,
@@ -52,7 +54,7 @@ const logoutUser = () => {
 }
 
 // create user account on admin page 
-const createUser= ({username, email, password, accessLevel}) => {
+const createUser = ({username, email, password, accessLevel}) => {
 	return (dispatch) => {
 		return axios.post(serverUrl + 'api/createUser', {
 			username,

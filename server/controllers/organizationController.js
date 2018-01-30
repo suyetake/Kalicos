@@ -16,7 +16,7 @@ function lookupAddress(address) {
 }
 
 module.exports = {
-  // user creates one organization
+  // admin creates one organization
   create(req, res) {
     var { name, address, description, category } = req.body
     lookupAddress(address)
@@ -148,9 +148,9 @@ module.exports = {
         var find = Organizations.find({ isAccepted: true, latLng: { $geoWithin: { $centerSphere: [ [ latLng.coordinates[0], latLng.coordinates[1] ], distance / 3963.2 ] } } })
         find.exec(function (err, orgs) {
           if (err) {
-            console.log(err)
             res.send(err)
           } else {
+            console.log('length', orgs.length)
             res.send(orgs)
           }
         })

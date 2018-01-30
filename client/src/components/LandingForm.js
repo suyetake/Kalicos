@@ -11,17 +11,7 @@ let LandingForm = (props) => {
 					type="text"
 					placeholder="Enter your location"
 				/>
-				<label>Miles</label>
-				<Field 
-					name="distance"
-					component="select"
-				>
-					<option>Select Distance</option>
-					<option value="1">1</option>
-		            <option value="5">5</option>
-		            <option value="10">10</option>
-         		 </Field>
-         		 <button type="submit">Search</button>
+         		 <button type="submit">GO!</button>
 			</form>
 		</div>
 	)

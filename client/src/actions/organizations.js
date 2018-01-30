@@ -36,13 +36,12 @@ const receiveOrganizationsByLocation = (data) => {
 	}
 }
 
-const getOrganizationsByLocation = (address, distance) => {
-	console.log('in action', address, distance)
+const getOrganizationsByLocation = (address) => {
 	return (dispatch) => {
 		return axios.get(serverUrl + 'api/organization', { 
 			params: {
 			  address,
-			  distance
+			  distance: 5
 			}
 		})
 		.then(
@@ -50,8 +49,65 @@ const getOrganizationsByLocation = (address, distance) => {
 			error => console.log('A request error occurred', error)
 		)
 		.then(
-			data => dispatch(receiveOrganizationsByLocation(data))
-		)
+			data => {
+				// increase distance to 10 miles if no results
+				if (data.length === 0) {
+					return axios.get(serverUrl + 'api/organization', { 
+						params: {
+						  address,
+						  distance: 10
+						}
+					})
+					.then(
+						response => response.data,
+						error => console.log('A request error occurred', error)
+					)
+					.then(
+						data => {
+							// increase distance to 25 miles if no results returned
+							if (data.length === 0) {
+								return axios.get(serverUrl + 'api/organization', { 
+									params: {
+									  address,
+									  distance: 25
+									}
+								})
+								.then(
+									response => response.data,
+									error => console.log('A request error occurred', error)
+								)
+								.then(
+									data => {
+										// increase distance to 50 miles if no results returned
+										if (data.length === 0) {
+											return axios.get(serverUrl + 'api/organization', { 
+												params: {
+												  address,
+												  distance: 50
+												}
+											})
+											.then(
+												response => response.data,
+												error => console.log('A request error occurred', error)
+											)
+											.then(
+												data => dispatch(receiveOrganizationsByLocation(data))
+											)
+										} else {
+											dispatch(receiveOrganizationsByLocation(data))
+										}
+									}
+								)
+							} else {
+								dispatch(receiveOrganizationsByLocation(data))
+							}
+						} 
+					)
+				} else {
+					dispatch(receiveOrganizationsByLocation(data))
+				}
+			}
+		)			
 	}
 }
 
