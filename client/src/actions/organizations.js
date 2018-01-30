@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { serverUrl } from './constants'
 
 const RECEIVE_ALL_ORGANIZATIONS = 'RECEIVE_ALL_ORGANIZATIONS'
 const RECEIVE_ADDED_ORGANIZATION = 'RECEIVE_ADDED_ORGANIZATION'
@@ -17,7 +17,7 @@ const receiveAllOrganizations = (data) => {
 
 const getAllOrganizations = () => {
 	return (dispatch) => {
-		return axios.get('http://localhost:4000/api/organizations')
+		return axios.get(serverUrl + 'api/organizations')
 		.then(
 			response => response.data,
 			error => console.log('A request error occurred', error)
@@ -39,7 +39,7 @@ const receiveOrganizationsByLocation = (data) => {
 const getOrganizationsByLocation = (address, distance) => {
 	console.log('in action', address, distance)
 	return (dispatch) => {
-		return axios.get('http://localhost:4000/api/organization', { 
+		return axios.get(serverUrl + 'api/organization', { 
 			params: {
 			  address,
 			  distance
@@ -71,7 +71,7 @@ const addOrganization = ({
   address = ''
 }) => {
 	return (dispatch) => {
-		return axios.post('http://localhost:4000/api/organization', {
+		return axios.post(serverUrl + 'api/organization', {
 			name,
 			category,
 			description,
@@ -94,7 +94,7 @@ const receiveUpdatedOrganization = (updates) => {
 
 const updateOrganization = (updates) => {
 	return (dispatch) => {
-		return axios.put('http://localhost:4000/api/updateorganization', updates)
+		return axios.put(serverUrl + 'api/updateorganization', updates)
 		.then(
 			response => response.data,
 			error => console.log('A request error occurred', error)

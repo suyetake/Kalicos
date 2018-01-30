@@ -1,15 +1,16 @@
 import axios from 'axios'
+import { serverUrl } from './constants'
 
 const RECEIVE_USER_FOR_UPDATE = 'RECEIVE_USER_FOR_UPDATE'
 const CLEAR_UPDATED_USER = 'CLEAR_USER_FOR_UPDATE'
 const RECEIVE_ORGANIZATION_FOR_UPDATE = 'RECEIVE_ORGANIZATION_FOR_UPDATE'
 const CLEAR_UPDATED_ORGANIZATION = 'UPDATED_ORGANIZATION'
- 
+
 // retrieve one user to update on admin page
 const findUserForUpdate = (email) => {
 	return (dispatch) => {
 		console.log('email', email)
-		return axios.get('http://localhost:4000/api/user', {
+		return axios.get(serverUrl + 'api/user', {
 			params: {
 				email
 			}
@@ -34,7 +35,7 @@ const receiveUserForUpdate = (user) => {
 // update user on admin page 
 const updateUser = (updates) => {
 	return (dispatch) => {
-		return axios.put('http://localhost:4000/api/updateuser', updates)
+		return axios.put(serverUrl + 'api/updateuser', updates)
 		.then(
 			response => console.log(response.data),
 			error => console.log('A request error occurred', error)
@@ -51,7 +52,7 @@ const clearUpdatedUser = () => {
 // retrieve one organization to update on admin page
 const findOrganizationForUpdate = (name) => {
 	return (dispatch) => {
-		return axios.get('http://localhost:4000/api/oneorganization', {
+		return axios.get(serverUrl + 'api/oneorganization', {
 			params: {
 				name
 			}
