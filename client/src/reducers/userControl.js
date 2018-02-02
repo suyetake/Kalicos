@@ -11,11 +11,7 @@ const userControlReducerDefaultState = {
 		lng: -105.2705456
 	},
 	modal: '',
-	user: {
-		accessLevel: '',
-		email: '',
-		username: ''
-	}
+	user: {}
 }
 
 const userControlReducer = (state = userControlReducerDefaultState, action) => {
@@ -38,11 +34,7 @@ const userControlReducer = (state = userControlReducerDefaultState, action) => {
 		case LOGOUT_USER:
 			return {
 				...state,
-				user: {
-					accessLevel: '',
-					email: '',
-					username: ''
-				}
+				user: {}
 			}
 		default:
 			return state

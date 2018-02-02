@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { serverUrl } from './constants'
 
 const RECEIVE_ALL_ORGANIZATIONS = 'RECEIVE_ALL_ORGANIZATIONS'
 const RECEIVE_ADDED_ORGANIZATION = 'RECEIVE_ADDED_ORGANIZATION'
@@ -17,7 +17,7 @@ const receiveAllOrganizations = (data) => {
 
 const getAllOrganizations = () => {
 	return (dispatch) => {
-		return axios.get('http://localhost:4000/api/organizations')
+		return axios.get(serverUrl + 'api/organizations')
 		.then(
 			response => response.data,
 			error => console.log('A request error occurred', error)
@@ -36,13 +36,12 @@ const receiveOrganizationsByLocation = (data) => {
 	}
 }
 
-const getOrganizationsByLocation = (address, distance) => {
-	console.log('in action', address, distance)
+const getOrganizationsByLocation = (address) => {
 	return (dispatch) => {
-		return axios.get('http://localhost:4000/api/organization', { 
+		return axios.get(serverUrl + 'api/organization', { 
 			params: {
 			  address,
-			  distance
+			  distance: 5
 			}
 		})
 		.then(
@@ -50,8 +49,65 @@ const getOrganizationsByLocation = (address, distance) => {
 			error => console.log('A request error occurred', error)
 		)
 		.then(
-			data => dispatch(receiveOrganizationsByLocation(data))
-		)
+			data => {
+				// increase distance to 10 miles if no results
+				if (data.length === 0) {
+					return axios.get(serverUrl + 'api/organization', { 
+						params: {
+						  address,
+						  distance: 10
+						}
+					})
+					.then(
+						response => response.data,
+						error => console.log('A request error occurred', error)
+					)
+					.then(
+						data => {
+							// increase distance to 25 miles if no results returned
+							if (data.length === 0) {
+								return axios.get(serverUrl + 'api/organization', { 
+									params: {
+									  address,
+									  distance: 25
+									}
+								})
+								.then(
+									response => response.data,
+									error => console.log('A request error occurred', error)
+								)
+								.then(
+									data => {
+										// increase distance to 50 miles if no results returned
+										if (data.length === 0) {
+											return axios.get(serverUrl + 'api/organization', { 
+												params: {
+												  address,
+												  distance: 50
+												}
+											})
+											.then(
+												response => response.data,
+												error => console.log('A request error occurred', error)
+											)
+											.then(
+												data => dispatch(receiveOrganizationsByLocation(data))
+											)
+										} else {
+											dispatch(receiveOrganizationsByLocation(data))
+										}
+									}
+								)
+							} else {
+								dispatch(receiveOrganizationsByLocation(data))
+							}
+						} 
+					)
+				} else {
+					dispatch(receiveOrganizationsByLocation(data))
+				}
+			}
+		)			
 	}
 }
 
@@ -71,7 +127,7 @@ const addOrganization = ({
   address = ''
 }) => {
 	return (dispatch) => {
-		return axios.post('http://localhost:4000/api/organization', {
+		return axios.post(serverUrl + 'api/organization', {
 			name,
 			category,
 			description,
@@ -94,7 +150,7 @@ const receiveUpdatedOrganization = (updates) => {
 
 const updateOrganization = (updates) => {
 	return (dispatch) => {
-		return axios.put('http://localhost:4000/api/updateorganization', updates)
+		return axios.put(serverUrl + 'api/updateorganization', updates)
 		.then(
 			response => response.data,
 			error => console.log('A request error occurred', error)

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { serverUrl } from './constants'
 import { receiveAddedOrganization } from './organizations'
 
 const RECEIVE_NEW_ORGANIZATIONS = 'RECEIVE_NEW_ORGANIZATIONS'
@@ -14,7 +15,7 @@ const receiveNewOrganizations = (data) => {
 
 const getNewOrganizations = () => {
 	return (dispatch) => {
-		return axios.get('http://localhost:4000/api/neworganizations')
+		return axios.get(serverUrl + 'api/neworganizations')
 		.then(
 			response => response.data,
 			error => console.log('A request error occurred', error)
@@ -28,7 +29,7 @@ const getNewOrganizations = () => {
 // admin acceptance of new organization. updates org in db and adds to orgs array on map
 const acceptNewOrganization = (organization) => {
 	return (dispatch) => {
-		return axios.put('http://localhost:4000/api/acceptnew', {
+		return axios.put(serverUrl + 'api/acceptnew', {
 			_id: organization._id
 		})
 		.then(
@@ -54,7 +55,7 @@ const removeFromNewOrganization = (_id) => {
 const rejectNewOrganization = (_id) => {
 	console.log('reject', _id, )
 	return (dispatch) => {
-		return axios.delete('http://localhost:4000/api/removeorganization', {
+		return axios.delete(serverUrl + 'api/removeorganization', {
 			data: {
 				_id
 			}     

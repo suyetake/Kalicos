@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { serverUrl } from './constants'
 
 const RECEIVE_USER_LOGIN = 'RECEIVE_USER_LOGIN'
 const SET_MAP_CENTER = 'SET_MAP_CENTER'
@@ -12,6 +13,8 @@ const setMapCenter = (mapCenter) => {
 		mapCenter
 	}
 }
+
+
 const setSelectedModal = (id) => {
 	return {
 		type: SET_SELECTED_MODAL,
@@ -29,7 +32,7 @@ const receiveUserLogin = (user) => {
 
 const loginUser = (username, password) => {
 	return (dispatch) => {
-		return axios.post('http://localhost:4000/login', {
+		return axios.post(serverUrl + 'login', {
 			username,
 			password
 		})
@@ -51,9 +54,9 @@ const logoutUser = () => {
 }
 
 // create user account on admin page 
-const createUser= ({username, email, password, accessLevel}) => {
+const createUser = ({username, email, password, accessLevel}) => {
 	return (dispatch) => {
-		return axios.post('http://localhost:4000/api/createUser', {
+		return axios.post(serverUrl + 'api/createUser', {
 			username,
 			email,
 			password,
