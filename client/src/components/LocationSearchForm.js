@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-let LandingForm = (props) => {
+let LocationSearchForm = (props) => {
 	return (
 		<div>
 			<form onSubmit={props.handleSubmit}>
@@ -17,8 +17,8 @@ let LandingForm = (props) => {
 	)
 }
 
-LandingForm = reduxForm({
-  form: 'landingForm'
-})(LandingForm)
+LocationSearchForm = reduxForm({
+  form: 'locationSearchForm'
+})(LocationSearchForm)
 
-export default LandingForm
+export default LocationSearchForm

@@ -1,3 +1,5 @@
+import 'normalize.css/normalize.css'
+import './styles/index.css'
 import React from 'react'
 import { render } from 'react-dom'
 import App from './components/App'
@@ -25,7 +27,8 @@ store.dispatch(getAllOrganizations())
 
 render(
   <Provider store={ store }>
-    <BrowserRouter>
+    <BrowserRouter
+    forceRefresh={false}>
       <App />
     </BrowserRouter>
   </Provider>,

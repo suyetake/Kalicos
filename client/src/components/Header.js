@@ -1,8 +1,12 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
+import LocationSearch from './LocationSearch'
 
-const Header = (props) => (
+class Header extends Component {
+
+  render() {
+    return (
       <div>
         <ul>
           <li><Link to="/">Home</Link></li>
@@ -10,14 +14,11 @@ const Header = (props) => (
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contact">Contact</Link></li>
         </ul>
+        <LocationSearch />
       </div>
-)
-
-const mapStateToProps = (state, props) => {
-  return {
-    user: state.userControl.user
+    )
   }
 }
 
 
-export default connect(mapStateToProps)(Header)
+export default withRouter(Header)
