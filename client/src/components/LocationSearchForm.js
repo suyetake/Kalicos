@@ -1,15 +1,16 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
+import '../styles/LocationSearchForm.css'
 
 let LocationSearchForm = (props) => {
 	return (
-		<div>
+		<div className="locationsearchform">
+			<h3>Find a charity near</h3>
 			<form onSubmit={props.handleSubmit}>
 				<Field 
 					name="address"
 					component="input"
 					type="text"
-					placeholder="Enter your location"
 				/>
          		 <button type="submit">GO!</button>
 			</form>
