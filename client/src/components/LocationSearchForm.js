@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import '../styles/LocationSearchForm.css'
 import { FormErrors } from './FormErrors'
 
 class LocationSearchForm extends Component {
@@ -71,7 +71,8 @@ class LocationSearchForm extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="locationsearchform">
+			<h3>Find a charity near</h3>
 				<form onSubmit={this.handleSubmit}>
 					<div className="panel panel-default">
 						<FormErrors formErrors={this.state.formErrors} />
@@ -93,13 +94,6 @@ class LocationSearchForm extends Component {
 							onChange={this.handleUserInput}
 						/>
 					</div>
-					<label htmlFor="distance">Miles</label>
-					<select name="distance" id="distance">
-						<option defaultValue>Select</option>
-						<option value="1">1</option>
-						<option value="5">5</option>
-						<option value="10">10</option>
-					</select>
 					<button type="submit" disabled={!this.state.formValid}>
 						Search
 					</button>
