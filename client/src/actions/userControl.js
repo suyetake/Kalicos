@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { serverUrl } from './constants'
+import { serverUrl } from '../config'
 
 const RECEIVE_USER_LOGIN = 'RECEIVE_USER_LOGIN'
 const SET_MAP_CENTER = 'SET_MAP_CENTER'

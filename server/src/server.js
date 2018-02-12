@@ -3,6 +3,8 @@ const cors       = require('cors')
 const express    = require('express')
 const helmet     = require('helmet')
 const logger     = require('morgan')
+const fs         = require('fs')
+const path       = require('path')
 const passport   = require('passport')
 const session    = require('express-session')
 
@@ -42,6 +44,11 @@ app.use(passport.session())
 
 if(isDevEnv) {
   app.use(logger('dev'))
+}
+
+if(process.env.NODE_ENV === 'production') {
+  var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
+  app.use(logger('combined', {stream: accessLogStream}))
 }
 
 // attach routes to app

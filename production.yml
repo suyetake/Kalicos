@@ -1,0 +1,6 @@
+version: "2"
+services:
+  server:
+    environment:
+      NODE_ENV: production
+    command: node src/server.js
