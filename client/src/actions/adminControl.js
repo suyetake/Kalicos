@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { serverUrl } from './constants'
+import { serverUrl } from '../config'
 
 const RECEIVE_USER_FOR_UPDATE = 'RECEIVE_USER_FOR_UPDATE'
 const CLEAR_UPDATED_USER = 'CLEAR_USER_FOR_UPDATE'

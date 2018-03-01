@@ -6,3 +6,4 @@ as well as advice and recommendations for contributing to this project.
 
 - [Tool Recommendations](./recommended_tools.md)
 - [Contribution Guidelines](./contributing_guidelines.md)
+- [Deployment Strategy](./deployment.md)

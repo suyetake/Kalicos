@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { serverUrl } from './constants'
+import { serverUrl } from '../config'
 import { receiveAddedOrganization } from './organizations'
 
 const RECEIVE_NEW_ORGANIZATIONS = 'RECEIVE_NEW_ORGANIZATIONS'
