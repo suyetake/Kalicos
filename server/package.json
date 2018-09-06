@@ -1,7 +1,7 @@
 {
-  "name": "kalios-rest",
+  "name": "kalicos-rest",
   "version": "0.0.0",
-  "description": "Rest API for Kalios project",
+  "description": "Rest API for Kalicos project",
   "main": "server.js",
   "scripts": {
     "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha tests/**/*.test.js",
@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint **/*.js --fix && eslint src/server.js --fix"
   },
-  "author": "Kalios Team",
+  "author": "Kalicos Team",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.16.2",
